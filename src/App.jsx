@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import './App.css';
 
 function App() {
@@ -28,11 +28,21 @@ function App() {
     }
   };
 
-  const selectProject = (project) => {
+  const selectProject = useCallback((project) => {
     setCurrentProject(project);
-    // Reset screens when a new project is selected
-    setScreens([]);
-  };
+     // Reset screens when a new project is selected
+     setScreens([]);
+  }, []);
+
+  const deleteProject = useCallback((id, event) => {
+    event.stopPropagation();
+    setProjects(projects => projects.filter((project) => project.id !== id));
+  }, []);
+  
+  const deleteScreen = useCallback((id, event) => {
+    event.stopPropagation();
+    setScreens(screens => screens.filter((screen) => screen.id !== id));
+  }, []);
 
   return (
     <div>
@@ -40,9 +50,10 @@ function App() {
         <>
           <h2>Projects</h2>
           <ol className="list-item">
-            {projects.map((project, index) => (
-              <li key={index} onClick={() => selectProject(project)}>
+            {projects.map((project) => (
+              <li key={project.id} onClick={() => selectProject(project)}>
                 {project.name}
+                <button onClick={(event) => deleteProject(project.id, event)}>Delete</button>
               </li>
             ))}
           </ol>
@@ -53,8 +64,11 @@ function App() {
           <button onClick={() => setCurrentProject(null)}>&lt;</button>
           <h2>{currentProject.name}</h2>
           <ol className="list-item">
-            {screens.map((screen, index) => (
-              <li key={index}>{screen.name}</li>
+            {screens.map((screen) => (
+              <li key={screen.id}>
+                {screen.name}
+                <button onClick={(event) => deleteScreen(screen.id, event)}>Delete</button>
+              </li>
             ))}
           </ol>
           <button onClick={addScreen}>Add Screen</button>
