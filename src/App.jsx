@@ -6,20 +6,26 @@ function App() {
   const [screens, setScreens] = useState([]);
   const [currentProject, setCurrentProject] = useState(null);
 
-  const addProject = () => {
-    let projectName = prompt("Enter project name");
-    if (projectName.trim() === "") {
-      projectName = `Project ${projects.length + 1}`;
+  const promptForName = (type, items) => {
+    let name = prompt(`Enter ${type} name`);
+    if (name.trim() === "") {
+      name = `${type} ${items.length + 1}`;
     }
-    setProjects([...projects, projectName]);
+    return name;
+  }
+
+  const addProject = () => {
+    const projectName = promptForName("project", projects);
+    if (projectName !== null) {
+      setProjects(prevProjects => [...prevProjects, { id: Date.now(), name: projectName }]);
+    }
   };
   
   const addScreen = () => {
-    let screenName = prompt("Enter screen name");
-    if (screenName.trim() === "") {
-      screenName = `Screen ${screens.length + 1}`;
+    const screenName = promptForName("screen", screens);
+    if (screenName !== null) {
+      setScreens(prevScreens => [...prevScreens, { id: Date.now(), name: screenName }]);
     }
-    setScreens([...screens, screenName]);
   };
 
   const selectProject = (project) => {
@@ -36,7 +42,7 @@ function App() {
           <ol className="list-item">
             {projects.map((project, index) => (
               <li key={index} onClick={() => selectProject(project)}>
-                {project}
+                {project.name}
               </li>
             ))}
           </ol>
@@ -44,14 +50,14 @@ function App() {
         </>
       ) : (
         <>
-          <h2>{currentProject}</h2>
+          <button onClick={() => setCurrentProject(null)}>&lt;</button>
+          <h2>{currentProject.name}</h2>
           <ol className="list-item">
             {screens.map((screen, index) => (
-              <li key={index}>{screen}</li>
+              <li key={index}>{screen.name}</li>
             ))}
           </ol>
           <button onClick={addScreen}>Add Screen</button>
-          <button onClick={() => setCurrentProject(null)}>Back to Projects</button>
         </>
       )}
     </div>
