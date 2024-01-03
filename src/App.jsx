@@ -1,52 +1,62 @@
 import { useState, useCallback } from 'react';
-import './App.css';
 
-function App() {
+const App = () => {
   const [projects, setProjects] = useState([]);
-  const [screens, setScreens] = useState([]);
-  const [currentProject, setCurrentProject] = useState(null);
+  const [currentProjectId, setCurrentProjectId] = useState(null);
 
   const promptForName = (type, items) => {
     let name = prompt(`Enter ${type} name`);
-    if (name.trim() === "") {
+    if (name !== null && name.trim() === "") {
       name = `${type} ${items.length + 1}`;
     }
     return name;
-  }
+  };
 
   const addProject = () => {
     const projectName = promptForName("project", projects);
     if (projectName !== null) {
-      setProjects(prevProjects => [...prevProjects, { id: Date.now(), name: projectName }]);
-    }
-  };
-  
-  const addScreen = () => {
-    const screenName = promptForName("screen", screens);
-    if (screenName !== null) {
-      setScreens(prevScreens => [...prevScreens, { id: Date.now(), name: screenName }]);
+      setProjects(prevProjects => [...prevProjects, { id: Date.now(), name: projectName, screens: [] }]);
     }
   };
 
   const selectProject = useCallback((project) => {
-    setCurrentProject(project);
-     // Reset screens when a new project is selected
-     setScreens([]);
+    setCurrentProjectId(project.id);
   }, []);
 
   const deleteProject = useCallback((id, event) => {
     event.stopPropagation();
     setProjects(projects => projects.filter((project) => project.id !== id));
-  }, []);
-  
+    if (currentProjectId === id) {
+      setCurrentProjectId(null);
+    }
+  }, [currentProjectId]);
+
+  const addScreen = () => {
+    const currentProject = projects.find(project => project.id === currentProjectId);
+    const screenName = promptForName("screen", currentProject.screens);
+    if (screenName !== null) {
+      setProjects(prevProjects => prevProjects.map(project =>
+        project.id === currentProjectId
+          ? { ...project, screens: [...project.screens, { id: Date.now(), name: screenName }] }
+          : project
+      ));
+    }
+  };
+
   const deleteScreen = useCallback((id, event) => {
     event.stopPropagation();
-    setScreens(screens => screens.filter((screen) => screen.id !== id));
-  }, []);
+    setProjects(projects => projects.map(project =>
+      project.id === currentProjectId
+        ? { ...project, screens: project.screens.filter(screen => screen.id !== id) }
+        : project
+    ));
+  }, [currentProjectId]);
+
+  const currentProject = projects.find(project => project.id === currentProjectId);
 
   return (
     <div>
-      {currentProject === null ? (
+      {currentProjectId === null ? (
         <>
           <h2>Projects</h2>
           <ol className="list-item">
@@ -61,10 +71,9 @@ function App() {
         </>
       ) : (
         <>
-          <button onClick={() => setCurrentProject(null)}>&lt;</button>
           <h2>{currentProject.name}</h2>
           <ol className="list-item">
-            {screens.map((screen) => (
+            {currentProject.screens.map((screen) => (
               <li key={screen.id}>
                 {screen.name}
                 <button onClick={(event) => deleteScreen(screen.id, event)}>Delete</button>
@@ -72,10 +81,11 @@ function App() {
             ))}
           </ol>
           <button onClick={addScreen}>Add Screen</button>
+          <button onClick={() => setCurrentProjectId(null)}>Back to Projects</button>
         </>
       )}
     </div>
   );
-}
+};
 
 export default App;
