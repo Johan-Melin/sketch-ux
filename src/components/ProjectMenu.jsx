@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 
-const ProjectMenu = () => {
+import PropTypes from 'prop-types';
+
+const ProjectMenu = ({ onScreenSelect }) => {
   const [projects, setProjects] = useState([]);
   const [currentProjectId, setCurrentProjectId] = useState(null);
 
@@ -74,7 +76,7 @@ const ProjectMenu = () => {
           <h2>{currentProject.name}</h2>
           <ol className="list-item">
             {currentProject.screens.map((screen) => (
-              <li key={screen.id}>
+              <li key={screen.id} onClick={() => onScreenSelect(screen)}>
                 {screen.name}
                 <button onClick={(event) => deleteScreen(screen.id, event)}>Delete</button>
               </li>
@@ -86,6 +88,10 @@ const ProjectMenu = () => {
       )}
     </div>
   );
+};
+
+ProjectMenu.propTypes = {
+  onScreenSelect: PropTypes.func.isRequired,
 };
 
 export default ProjectMenu;

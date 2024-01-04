@@ -1,10 +1,25 @@
-import ProjectMenu from "./components/ProjectMenu";
-import "./App.css";
+import { useState } from 'react';
+import ProjectMenu from './components/ProjectMenu';
+import ScreenEditor from './components/ScreenEditor';
 
 function App() {
+  const [currentScreen, setCurrentScreen] = useState(null);
+
+  const handleScreenSelect = (screen) => {
+    setCurrentScreen(screen);
+  };
+
+  const handleBackToProjects = () => {
+    setCurrentScreen(null);
+  };
+
   return (
     <div>
-      <ProjectMenu />
+      {currentScreen === null ? (
+        <ProjectMenu onScreenSelect={handleScreenSelect} />
+      ) : (
+        <ScreenEditor screen={currentScreen} onBackToProjects={handleBackToProjects} />
+      )}
     </div>
   );
 }
