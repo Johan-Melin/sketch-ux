@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import "./ProjectMenu.css";
 
 import PropTypes from 'prop-types';
 
@@ -69,7 +70,7 @@ const ProjectMenu = ({ onScreenSelect }) => {
               </li>
             ))}
           </ol>
-          <button onClick={addProject}>Add Project</button>
+          <button onClick={addProject} className="glowBtn">Add Project</button>
         </>
       ) : (
         <>
