@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-function TopBar({ setSelectedColor, onBackToProjects }) {
+function TopBar({ setSelectedTool, onBackToProjects }) {
     const handleButtonClick = (color) => {
-        setSelectedColor(color);
+        setSelectedTool(color);
     };
 
     return (
@@ -16,7 +16,7 @@ function TopBar({ setSelectedColor, onBackToProjects }) {
 }
 
 TopBar.propTypes = {
-    setSelectedColor: PropTypes.func.isRequired,
+    setSelectedTool: PropTypes.func.isRequired,
     onBackToProjects: PropTypes.func.isRequired,
 };
 

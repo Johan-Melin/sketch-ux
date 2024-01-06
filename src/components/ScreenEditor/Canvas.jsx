@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
-
-const Canvas = ({ selectedColor }) => {
+import Square
+ from './Square';
+const Canvas = ({ selectedTool }) => {
     const [squares, setSquares] = useState([]);
     const [currentSquare, setCurrentSquare] = useState(null);
 
@@ -11,7 +12,7 @@ const Canvas = ({ selectedColor }) => {
         const rect = canvasRef.current.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        setCurrentSquare({ x, y, width: 0, height: 0, color: selectedColor });
+        setCurrentSquare({ x, y, width: 0, height: 0, color: selectedTool });
     };
 
     const handleMouseMove = (event) => {
@@ -34,29 +35,6 @@ const Canvas = ({ selectedColor }) => {
         }
     };
 
-    const Square = ({ square }) => (
-        <div
-            style={{
-                position: 'absolute',
-                top: square.y,
-                left: square.x,
-                width: `${square.width}px`,
-                height: `${square.height}px`,
-                backgroundColor: square.color
-            }}
-        />
-    );
-
-    Square.propTypes = {
-        square: PropTypes.shape({
-            x: PropTypes.number.isRequired,
-            y: PropTypes.number.isRequired,
-            width: PropTypes.number.isRequired,
-            height: PropTypes.number.isRequired,
-            color: PropTypes.string.isRequired
-        }).isRequired
-    };
-
     return (
         <div
             ref={canvasRef}
@@ -74,7 +52,7 @@ const Canvas = ({ selectedColor }) => {
 };
 
 Canvas.propTypes = {
-    selectedColor: PropTypes.string.isRequired,
+    selectedTool: PropTypes.string.isRequired,
 };
 
 export default Canvas;

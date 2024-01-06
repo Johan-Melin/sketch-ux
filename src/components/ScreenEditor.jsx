@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import TopBar from './ScreenEditor/TopBar';
-import CanvasArea from './ScreenEditor/Canvas';
+import Canvas from './ScreenEditor/Canvas';
 
 import PropTypes from 'prop-types';
 
 const ScreenEditor = ({ onBackToProjects }) => {
-    const [selectedColor, setSelectedColor] = useState('Red');
+    const [selectedTool, setSelectedTool] = useState('Red');
 
     return (
         <div>
-            <TopBar setSelectedColor={setSelectedColor} onBackToProjects={onBackToProjects} />
-            <CanvasArea selectedColor={selectedColor} />
+            <TopBar setSelectedTool={setSelectedTool} onBackToProjects={onBackToProjects} />
+            <Canvas selectedTool={selectedTool} />
         </div>
     );
 };
