@@ -1,3 +1,12 @@
+.menu {
+    padding: 1rem;
+    padding-left: 2rem;
+}
+  
+.listItem {
+    cursor: pointer;
+}
+  
 .glowBtn {
     background-color: #0fd;
     border-radius: 9999px;

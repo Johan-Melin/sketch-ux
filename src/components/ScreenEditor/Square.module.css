@@ -1,11 +1,31 @@
-.red {
-    background-color: red;
+
+:root {
+    --rect-txt: #555;
+    --rect-image: #999;
+}
+  
+.rect {
+    position: absolute;
+    z-index: 1;
+    border-radius: 5px;
 }
 
-.green {
-    background-color: green;
+.text {
+    height: 20px;
+    z-index: 2;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--rect-txt);
 }
 
-.blue {
-    background-color: blue;
+.image {
+    background-color: var(--rect-image); 
+}
+
+.input {
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--rect-txt);
 }

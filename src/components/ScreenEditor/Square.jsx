@@ -3,9 +3,8 @@ import styles from './Square.module.css';
 
 const Square = ({ square }) => (
     <div
-        className={styles[square.tool]}
+    className={`${styles.rect} ${styles[square.tool]}`}
         style={{
-            position: 'absolute',
             top: square.y,
             left: square.x,
             width: `${square.width}px`,

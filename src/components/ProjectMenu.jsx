@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import "./ProjectMenu.css";
+import styles from './ProjectMenu.module.css';
 
 import PropTypes from 'prop-types';
 
@@ -58,11 +58,11 @@ const ProjectMenu = ({ onScreenSelect }) => {
   const currentProject = projects.find(project => project.id === currentProjectId);
 
   return (
-    <div>
+    <div className={styles.menu}>
       {currentProjectId === null ? (
         <>
           <h2>Projects</h2>
-          <ol className="list-item">
+          <ol className={styles.listItem}>
             {projects.map((project) => (
               <li key={project.id} onClick={() => selectProject(project)}>
                 {project.name}
@@ -70,12 +70,12 @@ const ProjectMenu = ({ onScreenSelect }) => {
               </li>
             ))}
           </ol>
-          <button onClick={addProject} className="glowBtn">Add Project</button>
+          <button onClick={addProject} className={styles.glowBtn}>Add Project</button>
         </>
       ) : (
         <>
           <h2>{currentProject.name}</h2>
-          <ol className="list-item">
+          <ol className={styles.listItem}>
             {currentProject.screens.map((screen) => (
               <li key={screen.id} onClick={() => onScreenSelect(screen)}>
                 {screen.name}
