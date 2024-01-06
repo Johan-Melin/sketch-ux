@@ -1,22 +1,22 @@
 import PropTypes from 'prop-types';
 
-function TopBar({ setCanvasText, onBackToProjects }) {
-    const handleButtonClick = (text) => {
-        setCanvasText(text);
+function TopBar({ setSelectedColor, onBackToProjects }) {
+    const handleButtonClick = (color) => {
+        setSelectedColor(color);
     };
 
     return (
         <div>
             <button onClick={onBackToProjects}>Back</button>
-            <button onClick={() => handleButtonClick('Text from Button 1')}>Button 1</button>
-            <button onClick={() => handleButtonClick('Text from Button 2')}>Button 2</button>
-            <button onClick={() => handleButtonClick('Text from Button 3')}>Button 3</button>
+            <button onClick={() => handleButtonClick('Red')}>Red</button>
+            <button onClick={() => handleButtonClick('Green')}>Green</button>
+            <button onClick={() => handleButtonClick('Blue')}>Blue</button>
         </div>
     );
 }
 
 TopBar.propTypes = {
-    setCanvasText: PropTypes.func.isRequired,
+    setSelectedColor: PropTypes.func.isRequired,
     onBackToProjects: PropTypes.func.isRequired,
 };
 

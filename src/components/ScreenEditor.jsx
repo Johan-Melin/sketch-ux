@@ -5,12 +5,12 @@ import CanvasArea from './ScreenEditor/Canvas';
 import PropTypes from 'prop-types';
 
 const ScreenEditor = ({ onBackToProjects }) => {
-    const [canvasText, setCanvasText] = useState('');
+    const [selectedColor, setSelectedColor] = useState('Red');
 
     return (
         <div>
-            <TopBar setCanvasText={setCanvasText} onBackToProjects={onBackToProjects} />
-            <CanvasArea canvasText={canvasText} />
+            <TopBar setSelectedColor={setSelectedColor} onBackToProjects={onBackToProjects} />
+            <CanvasArea selectedColor={selectedColor} />
         </div>
     );
 };
