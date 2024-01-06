@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useRef } from 'react';
 
 const Canvas = ({ selectedColor }) => {
     const [squares, setSquares] = useState([]);
     const [currentSquare, setCurrentSquare] = useState(null);
 
+    const canvasRef = useRef();
     const handleMouseDown = (event) => {
-        const rect = event.target.getBoundingClientRect();
+        const rect = canvasRef.current.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         setCurrentSquare({ x, y, width: 0, height: 0, color: selectedColor });
@@ -14,7 +16,7 @@ const Canvas = ({ selectedColor }) => {
 
     const handleMouseMove = (event) => {
         if (currentSquare) {
-            const rect = event.target.getBoundingClientRect();
+            const rect = canvasRef.current.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
             setCurrentSquare({
@@ -57,6 +59,7 @@ const Canvas = ({ selectedColor }) => {
 
     return (
         <div
+            ref={canvasRef}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
