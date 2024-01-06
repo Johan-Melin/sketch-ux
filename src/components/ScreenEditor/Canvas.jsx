@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const CanvasArea = ({ selectedColor }) => {
+const Canvas = ({ selectedColor }) => {
     const [squares, setSquares] = useState([]);
     const [currentSquare, setCurrentSquare] = useState(null);
 
@@ -9,7 +9,7 @@ const CanvasArea = ({ selectedColor }) => {
         const rect = event.target.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        setCurrentSquare({ x, y, width: 0, height: 0 });
+        setCurrentSquare({ x, y, width: 0, height: 0, color: selectedColor });
     };
 
     const handleMouseMove = (event) => {
@@ -32,45 +32,46 @@ const CanvasArea = ({ selectedColor }) => {
         }
     };
 
+    const Square = ({ square }) => (
+        <div
+            style={{
+                position: 'absolute',
+                top: square.y,
+                left: square.x,
+                width: `${square.width}px`,
+                height: `${square.height}px`,
+                backgroundColor: square.color
+            }}
+        />
+    );
+
+    Square.propTypes = {
+        square: PropTypes.shape({
+            x: PropTypes.number.isRequired,
+            y: PropTypes.number.isRequired,
+            width: PropTypes.number.isRequired,
+            height: PropTypes.number.isRequired,
+            color: PropTypes.string.isRequired
+        }).isRequired
+    };
+
     return (
         <div
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
-            style={{ position: 'relative', height: '500px', width: '500px' }}
+            style={{ position: 'relative', height: '500px', width: '500px', backgroundColor: 'lightgrey' }}
         >
-            {selectedColor}
             {squares.map((square, index) => (
-                <div
-                    key={index}
-                    style={{
-                        position: 'absolute',
-                        top: square.y,
-                        left: square.x,
-                        width: `${square.width}px`,
-                        height: `${square.height}px`,
-                        backgroundColor: selectedColor
-                    }}
-                />
+                <Square key={index} square={square} />
             ))}
-            {currentSquare && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: currentSquare.y,
-                        left: currentSquare.x,
-                        width: `${currentSquare.width}px`,
-                        height: `${currentSquare.height}px`,
-                        backgroundColor: selectedColor
-                    }}
-                />
-            )}
+            {currentSquare && ( <Square square={currentSquare} /> )}
         </div>
     );
 };
 
-CanvasArea.propTypes = {
+Canvas.propTypes = {
     selectedColor: PropTypes.string.isRequired,
 };
 
-export default CanvasArea;
+export default Canvas;
