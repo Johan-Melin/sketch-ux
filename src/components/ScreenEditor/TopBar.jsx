@@ -8,9 +8,9 @@ function TopBar({ setSelectedTool, onBackToProjects }) {
     return (
         <div>
             <button onClick={onBackToProjects}>Back</button>
-            <button onClick={() => handleButtonClick('Red')}>Red</button>
-            <button onClick={() => handleButtonClick('Green')}>Green</button>
-            <button onClick={() => handleButtonClick('Blue')}>Blue</button>
+            <button onClick={() => handleButtonClick('red')}>Red</button>
+            <button onClick={() => handleButtonClick('green')}>Green</button>
+            <button onClick={() => handleButtonClick('blue')}>Blue</button>
         </div>
     );
 }

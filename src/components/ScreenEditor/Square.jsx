@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
+import styles from './Square.module.css';
 
 const Square = ({ square }) => (
     <div
+        className={styles[square.tool]}
         style={{
             position: 'absolute',
             top: square.y,
             left: square.x,
             width: `${square.width}px`,
             height: `${square.height}px`,
-            backgroundColor: square.color
         }}
     />
 );
@@ -19,7 +20,7 @@ Square.propTypes = {
         y: PropTypes.number.isRequired,
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
-        color: PropTypes.string.isRequired
+        tool: PropTypes.string.isRequired
     }).isRequired
 };
 

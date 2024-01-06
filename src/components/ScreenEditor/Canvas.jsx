@@ -12,7 +12,7 @@ const Canvas = ({ selectedTool }) => {
         const rect = canvasRef.current.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        setCurrentSquare({ x, y, width: 0, height: 0, color: selectedTool });
+        setCurrentSquare({ x, y, width: 0, height: 0, tool: selectedTool });
     };
 
     const handleMouseMove = (event) => {
