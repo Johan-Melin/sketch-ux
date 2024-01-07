@@ -2,9 +2,10 @@ import { useState, useRef, useContext } from 'react';
 import Square from './Square';
 import TopBarContext from '../../context/TopBarContext';
 
-const Canvas = () => {   
+import PropTypes from 'prop-types';
+
+const Canvas = ({ squares, setSquares }) => {
     const { selectedTool } = useContext(TopBarContext);   
-    const [squares, setSquares] = useState([]);
     const [currentSquare, setCurrentSquare] = useState(null);
 
     const canvasRef = useRef();
@@ -49,6 +50,11 @@ const Canvas = () => {
             {currentSquare && ( <Square square={currentSquare} /> )}
         </div>
     );
+};
+
+Canvas.propTypes = {
+    squares: PropTypes.array.isRequired,
+    setSquares: PropTypes.func.isRequired
 };
 
 export default Canvas;

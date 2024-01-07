@@ -6,12 +6,20 @@ import { useState } from 'react';
 
 const ScreenEditor = ({ onBackToProjects }) => {
     const [selectedTool, setSelectedTool] = useState('image');
+    const [squares, setSquares] = useState([]);
+    const handleAction = (action) => {
+        if (action === 'undo') {
+            setSquares(prevSquares => prevSquares.slice(0, -1));
+        } else if (action === 'clear') {
+            setSquares([]);
+        }
+    };
 
     return (
-        <TopBarContext.Provider value={{ selectedTool, setSelectedTool }}>
+        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction }}>
             <div>
                 <TopBar onBackToProjects={onBackToProjects} />
-                <Canvas />
+                <Canvas squares={squares} setSquares={setSquares} />
             </div>
         </TopBarContext.Provider>
     );
