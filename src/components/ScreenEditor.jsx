@@ -1,17 +1,19 @@
-import { useState } from 'react';
 import TopBar from './ScreenEditor/TopBar';
 import Canvas from './ScreenEditor/Canvas';
-
 import PropTypes from 'prop-types';
+import TopBarContext from '../context/TopBarContext';
+import { useState } from 'react';
 
 const ScreenEditor = ({ onBackToProjects }) => {
     const [selectedTool, setSelectedTool] = useState('image');
 
     return (
-        <div>
-            <TopBar setSelectedTool={setSelectedTool} onBackToProjects={onBackToProjects} />
-            <Canvas selectedTool={selectedTool} />
-        </div>
+        <TopBarContext.Provider value={{ selectedTool, setSelectedTool }}>
+            <div>
+                <TopBar onBackToProjects={onBackToProjects} />
+                <Canvas />
+            </div>
+        </TopBarContext.Provider>
     );
 };
 
