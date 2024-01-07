@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 
 function TopBar({ setSelectedTool, onBackToProjects }) {
-    const handleButtonClick = (tool) => {
+    const handleToolClick = (tool) => {
         setSelectedTool(tool);
     };
 
     return (
         <div>
             <button onClick={onBackToProjects}>Back</button>
-            <button onClick={() => handleButtonClick('text')}>text</button>
-            <button onClick={() => handleButtonClick('image')}>image</button>
-            <button onClick={() => handleButtonClick('input')}>input</button>
+            <button onClick={() => handleToolClick('text')}>text</button>
+            <button onClick={() => handleToolClick('image')}>image</button>
+            <button onClick={() => handleToolClick('input')}>input</button>
         </div>
     );
 }

@@ -5,7 +5,7 @@ import Canvas from './ScreenEditor/Canvas';
 import PropTypes from 'prop-types';
 
 const ScreenEditor = ({ onBackToProjects }) => {
-    const [selectedTool, setSelectedTool] = useState('Red');
+    const [selectedTool, setSelectedTool] = useState('image');
 
     return (
         <div>

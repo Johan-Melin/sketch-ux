@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
-import Square
- from './Square';
-const Canvas = ({ selectedTool }) => {
+import Square from './Square';
+
+const Canvas = ({ selectedTool }) => {      
     const [squares, setSquares] = useState([]);
     const [currentSquare, setCurrentSquare] = useState(null);
 
@@ -41,7 +40,7 @@ const Canvas = ({ selectedTool }) => {
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
-            style={{ position: 'relative', height: '500px', width: '500px', backgroundColor: 'lightgrey' }}
+            style={{ position: 'relative', height: '680px', width: '400px', backgroundColor: 'lightgrey' }}
         >
             {squares.map((square, index) => (
                 <Square key={index} square={square} />
