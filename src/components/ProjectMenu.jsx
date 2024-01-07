@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import styles from './ProjectMenu.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 import PropTypes from 'prop-types';
 
@@ -18,7 +19,7 @@ const ProjectMenu = ({ onScreenSelect }) => {
   const addProject = () => {
     const projectName = promptForName("project", projects);
     if (projectName !== null) {
-      setProjects(prevProjects => [...prevProjects, { id: Date.now(), name: projectName, screens: [] }]);
+      setProjects(prevProjects => [...prevProjects, { id: uuidv4(), name: projectName, screens: [] }]);
     }
   };
 
