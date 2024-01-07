@@ -3,19 +3,22 @@ import TopBarContext from '../../context/TopBarContext';
 import { useContext } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
-
+import { TOOLS, ACTIONS } from '../../constants/tools';
 function TopBar({ onBackToProjects }) {
     const { setSelectedTool, handleAction } = useContext(TopBarContext);
+    const { TEXT, IMAGE, INPUT } = TOOLS;
+    const { UNDO, CLEAR } = ACTIONS;
+
     return (
             <div className={styles.topBar}>
                 <div>
                     <TopBarButton name="back" handleClick={onBackToProjects}/>
-                    <TopBarButton name="text" handleClick={() => setSelectedTool('text')} />
-                    <TopBarButton name="image" handleClick={() => setSelectedTool('image')} />
-                    <TopBarButton name="input" handleClick={() => setSelectedTool('input')} />
+                    <TopBarButton name="text" handleClick={() => setSelectedTool(TEXT)} />
+                    <TopBarButton name="image" handleClick={() => setSelectedTool(IMAGE)} />
+                    <TopBarButton name="input" handleClick={() => setSelectedTool(INPUT)} />
                 </div><div>
-                    <TopBarButton name="undo" handleClick={() => handleAction('undo')} />
-                    <TopBarButton name="clear" handleClick={() => handleAction('clear')} />
+                    <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} />
+                    <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} />
                 </div>
         </div>
     );

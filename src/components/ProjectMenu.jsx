@@ -23,6 +23,18 @@ const ProjectMenu = ({ onScreenSelect }) => {
     }
   };
 
+  const editProject = (projectId, event) => {
+    event.stopPropagation();
+    const newName = prompt('Enter new project name');
+    if (newName !== null && newName !== '') {
+      setProjects(prevProjects =>
+        prevProjects.map(project =>
+          project.id === projectId ? { ...project, name: newName } : project
+        )
+      );
+    }
+  };
+
   const selectProject = useCallback((project) => {
     setCurrentProjectId(project.id);
   }, []);
@@ -47,6 +59,25 @@ const ProjectMenu = ({ onScreenSelect }) => {
     }
   };
 
+  const editScreen = (screenId, event) => {
+    event.stopPropagation();
+    const newName = prompt('Enter new screen name');
+    console.log("a");
+    if (newName !== null && newName !== '') {
+      console.log("b");
+      setProjects(prevProjects =>
+        prevProjects.map(project =>
+          project.id === currentProjectId ? {
+            ...project,
+            screens: project.screens.map(screen =>
+              screen.id === screenId ? { ...screen, name: newName } : screen
+            )
+          } : project
+        )
+      );
+    }
+  };
+
   const deleteScreen = useCallback((id, event) => {
     event.stopPropagation();
     setProjects(projects => projects.map(project =>
@@ -66,8 +97,13 @@ const ProjectMenu = ({ onScreenSelect }) => {
           <ol className={styles.listItem}>
             {projects.map((project) => (
               <li key={project.id} onClick={() => selectProject(project)}>
-                {project.name}
-                <button onClick={(event) => deleteProject(project.id, event)}>Delete</button>
+                <>
+                  {project.name}
+                </>
+                <>
+                  <button onClick={(event) => editProject(project.id, event)}>Edit</button>
+                  <button onClick={(event) => deleteProject(project.id, event)}>Delete</button>
+                </>
               </li>
             ))}
           </ol>
@@ -79,8 +115,13 @@ const ProjectMenu = ({ onScreenSelect }) => {
           <ol className={styles.listItem}>
             {currentProject.screens.map((screen) => (
               <li key={screen.id} onClick={() => onScreenSelect(screen)}>
-                {screen.name}
-                <button onClick={(event) => deleteScreen(screen.id, event)}>Delete</button>
+                <>
+                  {screen.name}
+                </>
+                <>
+                  <button onClick={(event) => editScreen(screen.id, event)}>Edit</button>
+                  <button onClick={(event) => deleteScreen(screen.id, event)}>Delete</button>
+                </>
               </li>
             ))}
           </ol>
