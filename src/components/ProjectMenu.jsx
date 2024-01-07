@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react';
 import styles from './ProjectMenu.module.css';
-import { v4 as uuidv4 } from 'uuid';
 
 import PropTypes from 'prop-types';
 
 const ProjectMenu = ({ onScreenSelect }) => {
   const [projects, setProjects] = useState([]);
   const [currentProjectId, setCurrentProjectId] = useState(null);
+  const uuid = crypto.randomUUID();
 
   const promptForName = (type, items) => {
     let name = prompt(`Enter ${type} name`);
@@ -19,7 +19,7 @@ const ProjectMenu = ({ onScreenSelect }) => {
   const addProject = () => {
     const projectName = promptForName("project", projects);
     if (projectName !== null) {
-      setProjects(prevProjects => [...prevProjects, { id: uuidv4(), name: projectName, screens: [] }]);
+      setProjects(prevProjects => [...prevProjects, { id: uuid, name: projectName, screens: [] }]);
     }
   };
 
