@@ -1,0 +1,7 @@
+.canvas {
+    position: relative;
+    height: 680px;
+    width: 400px;
+    background-color: lightgrey;
+    box-sizing: border-box;
+}

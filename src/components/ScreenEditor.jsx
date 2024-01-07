@@ -3,6 +3,7 @@ import Canvas from './ScreenEditor/Canvas';
 import PropTypes from 'prop-types';
 import TopBarContext from '../context/TopBarContext';
 import { useState } from 'react';
+import styles from './ScreenEditor.module.css';
 
 const ScreenEditor = ({ onBackToProjects }) => {
     const [selectedTool, setSelectedTool] = useState('image');
@@ -19,7 +20,9 @@ const ScreenEditor = ({ onBackToProjects }) => {
         <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction }}>
             <div>
                 <TopBar onBackToProjects={onBackToProjects} />
-                <Canvas squares={squares} setSquares={setSquares} />
+                <div className={styles.container} >
+                    <Canvas squares={squares} setSquares={setSquares} />
+                </div>
             </div>
         </TopBarContext.Provider>
     );

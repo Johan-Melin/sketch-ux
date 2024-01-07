@@ -1,8 +1,8 @@
 import { useState, useRef, useContext } from 'react';
 import Square from './Square';
 import TopBarContext from '../../context/TopBarContext';
-
 import PropTypes from 'prop-types';
+import styles from './Canvas.module.css';
 
 const Canvas = ({ squares, setSquares }) => {
     const { selectedTool } = useContext(TopBarContext);   
@@ -42,7 +42,7 @@ const Canvas = ({ squares, setSquares }) => {
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
-            style={{ position: 'relative', height: '680px', width: '400px', backgroundColor: 'lightgrey' }}
+            className={styles.canvas}
         >
             {squares.map((square, index) => (
                 <Square key={index} square={square} />
