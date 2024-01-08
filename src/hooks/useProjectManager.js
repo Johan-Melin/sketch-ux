@@ -1,7 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 export default function useProjectManager() {
-    const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState(() => {
+        const savedProjects = localStorage.getItem('projects');
+        return savedProjects ? JSON.parse(savedProjects) : [];
+    });
     const [currentProjectId, setCurrentProjectId] = useState(null);
     const uuid = crypto.randomUUID();
 
@@ -89,6 +92,10 @@ export default function useProjectManager() {
     };
 
     const currentProject = projects.find(project => project.id === currentProjectId);
+
+    useEffect(() => {
+        localStorage.setItem('projects', JSON.stringify(projects));
+    }, [projects]);
 
     return {
         projects,
