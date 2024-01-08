@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import ProjectMenu from './components/ProjectMenu';
 import ScreenEditor from './components/ScreenEditor';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(null);
 
-  const handleScreenSelect = (screen) => {
+  const handleScreenSelect = useCallback((screen) => {
     setCurrentScreen(screen);
-  };
+  }, []);
 
-  const handleBackToProjects = () => {
+  const handleBackToProjects = useCallback(() => {
     setCurrentScreen(null);
-  };
+  }, []);
 
   return (
     <div>
