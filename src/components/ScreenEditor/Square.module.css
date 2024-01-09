@@ -1,9 +1,3 @@
-
-:root {
-    --rect-txt: #555;
-    --rect-image: #999;
-}
-  
 .rect {
     position: absolute;
     z-index: 1;

@@ -2,6 +2,6 @@
     position: relative;
     height: 680px;
     width: 400px;
-    background-color: lightgrey;
+    background-color: var(--canvas-bg);
     box-sizing: border-box;
 }

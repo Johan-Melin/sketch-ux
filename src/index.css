@@ -11,6 +11,13 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --project-border: #ccc;
+  --topbar-bg: #666;
+  --topbar-btn-active: #0056b3;
+  --canvas-bg: #d3d3d3;
+  --rect-txt: #555;
+  --rect-image: #999;
 }
 
 body {

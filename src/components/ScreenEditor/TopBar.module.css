@@ -2,7 +2,7 @@
     display: flex;
     width: 100vw;
     justify-content: space-between;
-    background-color: #666;
+    background-color: var(--topbar-bg);
     height: 40px;
     box-sizing: border-box;
 }

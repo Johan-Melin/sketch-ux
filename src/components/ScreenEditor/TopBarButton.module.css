@@ -5,9 +5,9 @@
 }
 
 .topBarButton:hover {
-    background-color: #0056b3;
+    background-color: var(--topbar-btn-active);
 }
 
 .active {
-    background-color: #0056b3;
+    background-color: var(--topbar-btn-active);
 }
