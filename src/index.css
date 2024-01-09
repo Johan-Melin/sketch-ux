@@ -12,10 +12,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  --topbar-height: 40px;
+  --default-width: 100vw;
+  --default-height: calc(100vh - var(--topbar-height));  
+  --grid-size-x: 5vw;
+  --grid-size-y: 2.5vh;
+
   --project-border: #ccc;
   --topbar-bg: #666;
   --topbar-btn-active: #0056b3;
   --canvas-bg: #d3d3d3;
+  --grid-color: #ccc;
   --rect-txt: #555;
   --rect-image: #999;
 }
@@ -46,4 +53,13 @@ button {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --default-width: 340px;
+    --default-height: 680px;
+    --grid-size-x: 5%;
+    --grid-size-y: 2.5%;
+    }
 }

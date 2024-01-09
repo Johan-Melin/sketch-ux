@@ -1,7 +1,13 @@
 .canvas {
     position: relative;
-    height: 680px;
-    width: 400px;
+    height: var(--default-height);
+    width: var(--default-width);
     background-color: var(--canvas-bg);
     box-sizing: border-box;
+}
+
+.grid {
+    z-index: 1;
+    background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(to right, var(--grid-color) 1px, var(--canvas-bg) 1px);
+    background-size: var(--grid-size-x) var(--grid-size-y);
 }

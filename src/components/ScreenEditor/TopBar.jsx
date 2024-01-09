@@ -11,12 +11,13 @@ function TopBar({ onBackToProjects }) {
 
     return (
             <div className={styles.topBar}>
-                <div>
+                <div className={styles.row}>
                     <TopBarButton name="back" handleClick={onBackToProjects}/>
                     <TopBarButton name="text" handleClick={() => setSelectedTool(TEXT)} />
                     <TopBarButton name="image" handleClick={() => setSelectedTool(IMAGE)} />
                     <TopBarButton name="input" handleClick={() => setSelectedTool(INPUT)} />
-                </div><div>
+                </div>
+                <div className={styles.row}>
                     <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} />
                     <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} />
                 </div>

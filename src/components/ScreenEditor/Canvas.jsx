@@ -42,7 +42,7 @@ const Canvas = ({ squares, setSquares }) => {
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
-            className={styles.canvas}
+            className={`${styles.canvas} ${styles.grid}`}
         >
             {squares.map((square, index) => (
                 <Square key={index} square={square} />

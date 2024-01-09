@@ -1,8 +1,15 @@
 .topBar {
     display: flex;
+    flex-direction: row;
     width: 100vw;
     justify-content: space-between;
     background-color: var(--topbar-bg);
-    height: 40px;
+    height: var(--topbar-height);
     box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
