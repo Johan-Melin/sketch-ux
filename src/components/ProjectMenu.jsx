@@ -1,6 +1,7 @@
 import styles from './ProjectMenu.module.css';
 import useProjectManager from '../hooks/useProjectManager';
 import PropTypes from 'prop-types';
+import { FaEdit, FaTrash } from 'react-icons/fa'; 
 
 const ProjectMenu = ({ onScreenSelect }) => {
   const {
@@ -18,41 +19,33 @@ const ProjectMenu = ({ onScreenSelect }) => {
   } = useProjectManager();
 
   return (
-    <div className={styles.menu}>
+    <div className={styles.projectMenu}>
       {currentProjectId === null ? (
         <>
           <h2>Projects</h2>
-          <ol className={styles.listItem}>
-            {projects.map((project) => (
-              <li key={project.id} onClick={() => selectProject(project)}>
-                <>
-                  {project.name}
-                </>
-                <>
-                  <button onClick={(event) => editProject(project.id, event)}>Edit</button>
-                  <button onClick={(event) => deleteProject(project.id, event)}>Delete</button>
-                </>
-              </li>
-            ))}
-          </ol>
-          <button onClick={addProject} className={styles.glowBtn}>Add Project</button>
+          {projects.map((project) => (
+            <div className={styles.project} key={project.id} onClick={() => selectProject(project)}>
+              <span>{project.name}</span>
+              <div>
+                <FaEdit onClick={(event) => editProject(project.id, event)} />
+                <FaTrash onClick={(event) => deleteProject(project.id, event)} />
+              </div>
+            </div>
+          ))}
+          <button onClick={addProject}>Add Project</button>
         </>
       ) : (
         <>
           <h2>{currentProject.name}</h2>
-          <ol className={styles.listItem}>
-            {currentProject.screens.map((screen) => (
-              <li key={screen.id} onClick={() => onScreenSelect(screen)}>
-                <>
-                  {screen.name}
-                </>
-                <>
-                  <button onClick={(event) => editScreen(screen.id, event)}>Edit</button>
-                  <button onClick={(event) => deleteScreen(screen.id, event)}>Delete</button>
-                </>
-              </li>
-            ))}
-          </ol>
+          {currentProject.screens.map((screen) => (
+            <div className={styles.project} key={screen.id} onClick={() => onScreenSelect(screen)}>
+              <span>{screen.name}</span>
+              <div>
+                <FaEdit onClick={(event) => editScreen(screen.id, event)} />
+                <FaTrash onClick={(event) => deleteScreen(screen.id, event)} />
+              </div>
+            </div>
+          ))}
           <button onClick={addScreen}>Add Screen</button>
           <button onClick={previousPage}>Back to Projects</button>
         </>
