@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
 import styles from './Square.module.css';
 
-const Square = ({ square }) => (
-    <div
-    className={`${styles.rect} ${styles[square.tool]}`}
-        style={{
-            top: square.y,
-            left: square.x,
-            width: `${square.width}px`,
-            height: `${square.height}px`,
-        }}
-    />
-);
+const Square = ({ square, gridSize }) => {
+    return (
+        <div
+        className={`${styles.rect} ${styles[square.tool]}`}
+            style={{
+                left: square.x * gridSize.x,
+                top: square.y * gridSize.y,
+                width: `${square.width * gridSize.x}px`,
+                height: `${square.height * gridSize.y}px`,
+            }}
+        />
+    );
+};
 
 Square.propTypes = {
     square: PropTypes.shape({
@@ -20,7 +22,11 @@ Square.propTypes = {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
         tool: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    gridSize: PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired
+    })
 };
 
 export default Square;

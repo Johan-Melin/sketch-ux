@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import Square from './Square';
 import TopBarContext from '../../context/TopBarContext';
 import PropTypes from 'prop-types';
@@ -7,20 +7,43 @@ import styles from './Canvas.module.css';
 const Canvas = ({ squares, setSquares }) => {
     const { selectedTool } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
-
+    const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const canvasRef = useRef();
-    const handleMouseDown = (event) => {
-        const rect = canvasRef.current.getBoundingClientRect();
+
+    const updateGridSize = () => {
+        if (canvasRef.current) {
+            const rect = canvasRef.current.getBoundingClientRect();
+            // index.css grid-size = 5% x 2.5%
+            setGridSize({x: rect.width / 20, y: rect.height / 40})
+        }
+    }
+
+    useEffect(() => {
+        updateGridSize();
+        window.addEventListener('resize', updateGridSize);
+
+        return () => window.removeEventListener('resize', updateGridSize);
+    }, [canvasRef]); 
+
+    const drawElement = (event) => {
+        const rect = canvasRef.current.getBoundingClientRect(); 
+        // index.css grid-size = 5% x 2.5%
+        setGridSize({x: rect.width / 20, y: rect.height / 40})
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
+        const snappedX = Math.round(x / gridSize.x);
+        const snappedY = Math.round(y / gridSize.y);
+        return { x: snappedX, y: snappedY };
+    }
+
+    const handleMouseDown = (event) => {
+        const { x, y } = drawElement(event);
         setCurrentSquare({ x, y, width: 0, height: 0, tool: selectedTool });
     };
 
     const handleMouseMove = (event) => {
         if (currentSquare) {
-            const rect = canvasRef.current.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+            const { x, y } = drawElement(event);
             setCurrentSquare({
                 ...currentSquare,
                 width: x - currentSquare.x,
@@ -45,9 +68,9 @@ const Canvas = ({ squares, setSquares }) => {
             className={`${styles.canvas} ${styles.grid}`}
         >
             {squares.map((square, index) => (
-                <Square key={index} square={square} />
+                <Square key={index} square={square} gridSize={gridSize} />
             ))}
-            {currentSquare && ( <Square square={currentSquare} /> )}
+            {currentSquare && ( <Square square={currentSquare} gridSize={gridSize} /> )}
         </div>
     );
 };

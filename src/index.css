@@ -15,8 +15,8 @@
   --topbar-height: 40px;
   --default-width: 100vw;
   --default-height: calc(100vh - var(--topbar-height));  
-  --grid-size-x: 5vw;
-  --grid-size-y: 2.5vh;
+  --grid-size-x: 5%;
+  --grid-size-y: 2.5%;
 
   --project-border: #ccc;
   --topbar-bg: #666;
@@ -59,7 +59,5 @@ button {
   :root {
     --default-width: 340px;
     --default-height: 680px;
-    --grid-size-x: 5%;
-    --grid-size-y: 2.5%;
     }
 }
