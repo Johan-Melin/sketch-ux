@@ -29,8 +29,9 @@ const Canvas = ({ squares, setSquares }) => {
         const rect = canvasRef.current.getBoundingClientRect(); 
         // index.css grid-size = 5% x 2.5%
         setGridSize({x: rect.width / 20, y: rect.height / 40})
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        const isTouchEvent = event.type.startsWith('touch');
+        const x = isTouchEvent ? event.touches[0].clientX - rect.left : event.clientX - rect.left;
+        const y = isTouchEvent ? event.touches[0].clientY - rect.top : event.clientY - rect.top;    
         const snappedX = Math.round(x / gridSize.x);
         const snappedY = Math.round(y / gridSize.y);
         return { x: snappedX, y: snappedY };
@@ -65,6 +66,9 @@ const Canvas = ({ squares, setSquares }) => {
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
+            onTouchStart={handleMouseDown} 
+            onTouchMove={handleMouseMove} 
+            onTouchEnd={handleMouseUp}
             className={`${styles.canvas} ${styles.grid}`}
         >
             {squares.map((square, index) => (
