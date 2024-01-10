@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
 import { TOOLS, ACTIONS } from '../../constants/tools';
+import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaTrash } from 'react-icons/fa'; 
 function TopBar({ onBackToProjects }) {
     const { setSelectedTool, handleAction } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT } = TOOLS;
@@ -12,14 +13,14 @@ function TopBar({ onBackToProjects }) {
     return (
             <div className={styles.topBar}>
                 <div className={styles.row}>
-                    <TopBarButton name="back" handleClick={onBackToProjects}/>
-                    <TopBarButton name="text" handleClick={() => setSelectedTool(TEXT)} />
-                    <TopBarButton name="image" handleClick={() => setSelectedTool(IMAGE)} />
-                    <TopBarButton name="input" handleClick={() => setSelectedTool(INPUT)} />
+                    <TopBarButton name="back" handleClick={onBackToProjects} Icon={FaArrowLeft} />
+                    <TopBarButton name="text" handleClick={() => setSelectedTool(TEXT)} Icon={FaFont} />
+                    <TopBarButton name="image" handleClick={() => setSelectedTool(IMAGE)} Icon={FaSquare} />
+                    <TopBarButton name="input" handleClick={() => setSelectedTool(INPUT)} Icon={FaRegSquare} />
                 </div>
                 <div className={styles.row}>
-                    <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} />
-                    <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} />
+                    <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} Icon={FaUndo} />
+                    <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} Icon={FaTrash} />
                 </div>
         </div>
     );

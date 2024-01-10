@@ -9,10 +9,6 @@ export default function useProjectManager() {
     const [currentScreen, setCurrentScreen] = useState(null);
     const uuid = crypto.randomUUID();
 
-    useEffect(() => {
-        console.log('currentScreen', currentScreen);
-      }, [currentScreen]);
-
     const promptForName = (type, items) => {
     let name = prompt(`Enter ${type} name`);
     if (name !== null && name.trim() === "") {
