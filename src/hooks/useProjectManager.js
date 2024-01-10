@@ -6,7 +6,12 @@ export default function useProjectManager() {
         return savedProjects ? JSON.parse(savedProjects) : [];
     });
     const [currentProjectId, setCurrentProjectId] = useState(null);
+    const [currentScreen, setCurrentScreen] = useState(null);
     const uuid = crypto.randomUUID();
+
+    useEffect(() => {
+        console.log('currentScreen', currentScreen);
+      }, [currentScreen]);
 
     const promptForName = (type, items) => {
     let name = prompt(`Enter ${type} name`);
@@ -53,7 +58,7 @@ export default function useProjectManager() {
         if (screenName !== null) {
             setProjects(prevProjects => prevProjects.map(project =>
             project.id === currentProjectId
-                ? { ...project, screens: [...project.screens, { id: Date.now(), name: screenName }] }
+                ? { ...project, screens: [...project.screens, { id: Date.now(), name: screenName, rect: [] }] }
                 : project
             ));
         }
@@ -62,9 +67,7 @@ export default function useProjectManager() {
     const editScreen = (screenId, event) => {
         event.stopPropagation();
         const newName = prompt('Enter new screen name');
-        console.log("a");
         if (newName !== null && newName !== '') {
-            console.log("b");
             setProjects(prevProjects =>
             prevProjects.map(project =>
                 project.id === currentProjectId ? {
@@ -91,6 +94,15 @@ export default function useProjectManager() {
         setCurrentProjectId(null)
     };
 
+    const selectScreen = (screen) => {
+      setCurrentScreen(screen.id);
+    };
+  
+    const handleBackToProjects = useCallback(() => {
+      setCurrentScreen(null);
+    }, []);
+  
+
     const currentProject = projects.find(project => project.id === currentProjectId);
 
     useEffect(() => {
@@ -101,6 +113,9 @@ export default function useProjectManager() {
         projects,
         currentProjectId,
         currentProject,
+        currentScreen,
+        selectScreen,
+        handleBackToProjects,
         addProject,
         deleteProject,
         editProject,
