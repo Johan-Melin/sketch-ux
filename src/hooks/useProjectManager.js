@@ -9,19 +9,9 @@ export default function useProjectManager() {
     const [currentScreen, setCurrentScreen] = useState(null);
     const uuid = crypto.randomUUID();
 
-    const promptForName = (type, items) => {
-    let name = prompt(`Enter ${type} name`);
-    if (name !== null && name.trim() === "") {
-        name = `${type} ${items.length + 1}`;
-    }
-        return name;
-    };
-
     const addProject = () => {
-        const projectName = promptForName("project", projects);
-        if (projectName !== null) {
-            setProjects(prevProjects => [...prevProjects, { id: uuid, name: projectName, screens: [] }]);
-        }
+        const projectName ="Project " + (projects.length + 1);
+        setProjects(prevProjects => [...prevProjects, { id: uuid, name: projectName, screens: [] }]);
     };
 
     const editProject = (projectId, event) => {
@@ -50,14 +40,12 @@ export default function useProjectManager() {
 
     const addScreen = () => {
         const currentProject = projects.find(project => project.id === currentProjectId);
-        const screenName = promptForName("screen", currentProject.screens);
-        if (screenName !== null) {
-            setProjects(prevProjects => prevProjects.map(project =>
-            project.id === currentProjectId
-                ? { ...project, screens: [...project.screens, { id: Date.now(), name: screenName, rect: [] }] }
-                : project
-            ));
-        }
+        const screenName = "Screen " + (currentProject.screens.length + 1);
+        setProjects(prevProjects => prevProjects.map(project =>
+        project.id === currentProjectId
+            ? { ...project, screens: [...project.screens, { id: uuid, name: screenName, rect: [] }] }
+            : project
+        ));
     };
 
     const editScreen = (screenId, event) => {

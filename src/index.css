@@ -25,6 +25,7 @@
   --grid-color: #ccc;
   --rect-text: #555;
   --rect-image: #999;
+  --rect-border: #333;
 }
 
 body {

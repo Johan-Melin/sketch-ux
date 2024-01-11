@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
 import { TOOLS, ACTIONS } from '../../constants/tools';
-import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaRegObjectUngroup, FaHandPointer, FaTrash, FaFile } from 'react-icons/fa'; 
+import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaRegObjectUngroup, FaTrash, FaFile } from 'react-icons/fa'; 
 function TopBar({ onBackToProjects }) {
     const { setSelectedTool, handleAction } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT } = TOOLS;
@@ -21,7 +21,6 @@ function TopBar({ onBackToProjects }) {
                     <TopBarButton name="back" handleClick={onBackToProjects} Icon={FaArrowLeft} />
                     {isEditMode ? (
                         <>
-                            <TopBarButton name="select" handleClick={() => []} Icon={FaHandPointer} />
                             <TopBarButton name="delete" handleClick={() => []} Icon={FaTrash} />
                         </>
                     ) : (
