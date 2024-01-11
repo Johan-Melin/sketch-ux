@@ -5,13 +5,7 @@
 }
 
 .text {
-    height: 20px;
-    z-index: 2;
-    overflow: hidden;
-    text-overflow: clip;
-    white-space: nowrap;
-    font-weight: 600;
-    color: var(--rect-txt);
+    background-color: var(--rect-text);
 }
 
 .image {
