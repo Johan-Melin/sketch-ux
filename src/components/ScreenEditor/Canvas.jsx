@@ -32,8 +32,8 @@ const Canvas = ({ squares, setSquares }) => {
         const isTouchEvent = event.type.startsWith('touch');
         const x = isTouchEvent ? event.touches[0].clientX - rect.left : event.clientX - rect.left;
         const y = isTouchEvent ? event.touches[0].clientY - rect.top : event.clientY - rect.top;    
-        const snappedX = Math.round(x / gridSize.x);
-        const snappedY = Math.round(y / gridSize.y);
+        const snappedX = currentSquare ? Math.ceil(x / gridSize.x) : Math.floor(x / gridSize.x);
+        const snappedY = currentSquare ? Math.ceil(y / gridSize.y) : Math.floor(y / gridSize.y);
         return { x: snappedX, y: snappedY };
     }
 
