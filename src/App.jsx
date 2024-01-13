@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import ProjectMenu from './components/ProjectMenu';
 import ScreenEditor from './components/ScreenEditor';
-import useProjectManager from './hooks/useProjectManager';
+import useScreens from './hooks/useScreens';
 
 function App() {
-  const { currentScreen, selectScreen, handleBackToProjects } = useProjectManager();
+  const { currentScreen, selectScreen, handleBackToProjects } = useScreens();
 
   useEffect(() => {
     //prevent refresh page on swipe down

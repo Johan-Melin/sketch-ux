@@ -12,3 +12,7 @@
     border: 1px solid var(--project-border);
     margin-bottom: 10px;
 }
+
+.icon {
+    margin-left: 10px;
+}

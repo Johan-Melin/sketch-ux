@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
 
-export default function useProjectManager() {
+export default function useProjects() {
     const [projects, setProjects] = useState(() => {
         const savedProjects = localStorage.getItem('projects');
         return savedProjects ? JSON.parse(savedProjects) : [];
     });
     const [currentProjectId, setCurrentProjectId] = useState(null);
-    const [currentScreen, setCurrentScreen] = useState(null);
+    const [screenData, setScreenData] = useState([]);
     const uuid = crypto.randomUUID();
 
     const addProject = () => {
@@ -77,16 +77,7 @@ export default function useProjectManager() {
     const previousPage = () => {
         setCurrentProjectId(null)
     };
-
-    const selectScreen = (screen) => {
-      setCurrentScreen(screen.id);
-    };
   
-    const handleBackToProjects = useCallback(() => {
-      setCurrentScreen(null);
-    }, []);
-  
-
     const currentProject = projects.find(project => project.id === currentProjectId);
 
     useEffect(() => {
@@ -97,9 +88,8 @@ export default function useProjectManager() {
         projects,
         currentProjectId,
         currentProject,
-        currentScreen,
-        selectScreen,
-        handleBackToProjects,
+        screenData,
+        setScreenData,
         addProject,
         deleteProject,
         editProject,

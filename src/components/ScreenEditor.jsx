@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import TopBarContext from '../context/TopBarContext';
 import { useState } from 'react';
 import styles from './ScreenEditor.module.css';
+import useProjects from '../hooks/useProjects';
 
 const ScreenEditor = ({ onBackToProjects }) => {
     const [selectedTool, setSelectedTool] = useState('image');
-    const [squares, setSquares] = useState([]);
+    const {screenData, setScreenData} = useProjects();
     const handleAction = (action) => {
         if (action === 'undo') {
-            setSquares(prevSquares => prevSquares.slice(0, -1));
+            setScreenData(prevSquares => prevSquares.slice(0, -1));
         } else if (action === 'clear') {
-            setSquares([]);
+            setScreenData([]);
         }
     };
 
@@ -21,7 +22,7 @@ const ScreenEditor = ({ onBackToProjects }) => {
             <div>
                 <TopBar onBackToProjects={onBackToProjects} />
                 <div className={styles.container} >
-                    <Canvas squares={squares} setSquares={setSquares} />
+                    <Canvas squares={screenData} setSquares={setScreenData} />
                 </div>
             </div>
         </TopBarContext.Provider>

@@ -1,5 +1,5 @@
 import styles from './ProjectMenu.module.css';
-import useProjectManager from '../hooks/useProjectManager';
+import useProjects from '../hooks/useProjects';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
 
@@ -16,7 +16,7 @@ const ProjectMenu = ({ onScreenSelect }) => {
     editScreen,
     previousPage,
     currentProject,
-  } = useProjectManager();
+  } = useProjects();
 
   return (
     <div className={styles.projectMenu}>
@@ -27,8 +27,8 @@ const ProjectMenu = ({ onScreenSelect }) => {
             <div className={styles.project} key={project.id} onClick={() => selectProject(project)}>
               <span>{project.name}</span>
               <div>
-                <FaEdit onClick={(event) => editProject(project.id, event)} />
-                <FaTrash onClick={(event) => deleteProject(project.id, event)} />
+                <FaEdit className={styles.icon} onClick={(event) => editProject(project.id, event)} />
+                <FaTrash className={styles.icon} onClick={(event) => deleteProject(project.id, event)} />
               </div>
             </div>
           ))}
@@ -41,8 +41,8 @@ const ProjectMenu = ({ onScreenSelect }) => {
             <div className={styles.project} key={screen.id} onClick={() => onScreenSelect(screen)}>
               <span>{screen.name}</span>
               <div>
-                <FaEdit onClick={(event) => editScreen(screen.id, event)} />
-                <FaTrash onClick={(event) => deleteScreen(screen.id, event)} />
+                <FaEdit className={styles.icon} onClick={(event) => editScreen(screen.id, event)} />
+                <FaTrash className={styles.icon} onClick={(event) => deleteScreen(screen.id, event)} />
               </div>
             </div>
           ))}
