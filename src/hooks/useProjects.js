@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function useProjects() {
     const [projects, setProjects] = useState(() => {
@@ -7,17 +7,7 @@ export default function useProjects() {
     });
     const [currentProjectId, setCurrentProjectId] = useState(null);
     const [screenData, setScreenData] = useState([]);
-
-    const selectProject = useCallback((project) => {
-        setCurrentProjectId(project.id);
-    }, []);
-
-    const previousPage = () => {
-        setCurrentProjectId(null)
-    };
   
-    const currentProject = projects.find(project => project.id === currentProjectId);
-
     useEffect(() => {
         localStorage.setItem('projects', JSON.stringify(projects));
     }, [projects]);
@@ -27,10 +17,7 @@ export default function useProjects() {
         setProjects,
         currentProjectId,
         setCurrentProjectId,
-        currentProject,
         screenData,
         setScreenData,
-        selectProject,
-        previousPage,
     };
 }

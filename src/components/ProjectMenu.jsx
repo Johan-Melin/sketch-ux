@@ -11,12 +11,10 @@ const ProjectMenu = ({ onScreenSelect }) => {
     setProjects,
     currentProjectId,
     setCurrentProjectId,
-    selectProject,
-    previousPage,
-    currentProject,
   } = useProjects();
-  const { addProject, deleteProject, editProject } = useProjectActions(projects, setProjects, currentProjectId, setCurrentProjectId);
+  const { addProject, deleteProject, editProject, selectProject, previousPage } = useProjectActions(projects, setProjects, currentProjectId, setCurrentProjectId);
   const { addScreen, deleteScreen, editScreen } = useScreenActions(projects, setProjects, currentProjectId, setCurrentProjectId);
+  const currentProject = projects.find(project => project.id === currentProjectId);
 
   return (
     <div className={styles.projectMenu}>

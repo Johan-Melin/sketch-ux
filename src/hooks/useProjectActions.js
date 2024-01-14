@@ -25,9 +25,19 @@ export default function useProjectActions(projects, setProjects, currentProjectI
         }
     };
     
+    const selectProject = (project) => {
+        setCurrentProjectId(project.id);
+    };
+
+    const previousPage = () => {
+        setCurrentProjectId(null)
+    };
+
     return { 
         addProject,
         editProject,
         deleteProject,
+        selectProject,
+        previousPage
     };
 }
