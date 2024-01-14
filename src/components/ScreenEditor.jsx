@@ -20,7 +20,7 @@ const ScreenEditor = ({ onBackToProjects }) => {
     return (
         <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction }}>
             <div>
-                <TopBar onBackToProjects={onBackToProjects} />
+                <TopBar onBackToProjects={() => onBackToProjects(null)} />
                 <div className={styles.container} >
                     <Canvas squares={screenData} setSquares={setScreenData} />
                 </div>

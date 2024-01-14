@@ -6,8 +6,9 @@ export default function useProjects() {
         return savedProjects ? JSON.parse(savedProjects) : [];
     });
     const [currentProjectId, setCurrentProjectId] = useState(null);
+    const [currentScreenId, setCurrentScreenId] = useState(null);
     const [screenData, setScreenData] = useState([]);
-  
+
     useEffect(() => {
         localStorage.setItem('projects', JSON.stringify(projects));
     }, [projects]);
@@ -17,6 +18,8 @@ export default function useProjects() {
         setProjects,
         currentProjectId,
         setCurrentProjectId,
+        currentScreenId,
+        setCurrentScreenId,
         screenData,
         setScreenData,
     };

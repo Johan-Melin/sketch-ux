@@ -11,10 +11,17 @@ const ProjectMenu = ({ onScreenSelect }) => {
     setProjects,
     currentProjectId,
     setCurrentProjectId,
+    currentScreenId,
+    setCurrentScreenId,
   } = useProjects();
   const { addProject, deleteProject, editProject, selectProject, previousPage } = useProjectActions(projects, setProjects, currentProjectId, setCurrentProjectId);
-  const { addScreen, deleteScreen, editScreen } = useScreenActions(projects, setProjects, currentProjectId, setCurrentProjectId);
+  const { addScreen, deleteScreen, editScreen } = useScreenActions(projects, setProjects, currentProjectId, setCurrentProjectId, currentScreenId);
   const currentProject = projects.find(project => project.id === currentProjectId);
+
+  const handleScreenSelect = (screen) => {
+    onScreenSelect(screen);
+    setCurrentScreenId(screen.id);
+  }
 
   return (
     <div className={styles.projectMenu}>
@@ -36,7 +43,7 @@ const ProjectMenu = ({ onScreenSelect }) => {
         <>
           <h2>{currentProject.name}</h2>
           {currentProject.screens.map((screen) => (
-            <div className={styles.project} key={screen.id} onClick={() => onScreenSelect(screen)}>
+            <div className={styles.project} key={screen.id} onClick={() => handleScreenSelect(screen)}>
               <span>{screen.name}</span>
               <div>
                 <FaEdit className={styles.icon} onClick={(event) => editScreen(screen.id, event)} />
