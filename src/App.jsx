@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import ProjectMenu from './components/ProjectMenu';
 import ScreenEditor from './components/ScreenEditor';
 import useScreens from './hooks/useScreens';
+import { ProjectsProvider } from './hooks/ProjectsProvider';
 
 function App() {
   const { currentScreen, selectScreen, handleBackToProjects } = useScreens();
@@ -17,13 +18,15 @@ function App() {
   }, []);
 
   return (
-    <div>
-      {currentScreen === null ? (
-        <ProjectMenu onScreenSelect={selectScreen} />
-      ) : (
-        <ScreenEditor onBackToProjects={handleBackToProjects} />
-      )}
-    </div>
+    <ProjectsProvider>
+      <div>
+        {currentScreen === null ? (
+          <ProjectMenu onScreenSelect={selectScreen} />
+        ) : (
+          <ScreenEditor onBackToProjects={handleBackToProjects} />
+        )}
+      </div>
+    </ProjectsProvider>
   );
 }
 

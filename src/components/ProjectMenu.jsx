@@ -1,5 +1,5 @@
 import styles from './ProjectMenu.module.css';
-import useProjects from '../hooks/useProjects';
+import { useProjectsValue } from '../hooks/useProjects';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
 
@@ -16,7 +16,7 @@ const ProjectMenu = ({ onScreenSelect }) => {
     editScreen,
     previousPage,
     currentProject,
-  } = useProjects();
+  } = useProjectsValue();
 
   return (
     <div className={styles.projectMenu}>
