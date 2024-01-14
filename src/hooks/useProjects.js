@@ -1,6 +1,4 @@
 import { useState, useCallback, useEffect } from 'react';
-import { useContext } from 'react';
-import { ProjectsContext } from './ProjectsProvider';
 
 export default function useProjects() {
     const [projects, setProjects] = useState(() => {
@@ -101,8 +99,4 @@ export default function useProjects() {
         editScreen,
         previousPage,
     };
-}
-
-export function useProjectsValue() {
-    return useContext(ProjectsContext);
 }
