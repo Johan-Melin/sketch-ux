@@ -1,4 +1,16 @@
+import { useState } from "react";
+
 export default function useScreenActions(projects, setProjects, currentProjectId) {
+    const [currentScreen, setCurrentScreen] = useState(null);
+
+    const selectScreen = (screen) => {
+        setCurrentScreen(screen.id);
+    };
+
+    const handleBackToProjects = () => {
+        setCurrentScreen(null);
+    };
+    
     const uuid = crypto.randomUUID();
     const addScreen = () => {
         const currentProject = projects.find(project => project.id === currentProjectId);
@@ -37,6 +49,9 @@ export default function useScreenActions(projects, setProjects, currentProjectId
     };
 
     return {
+        currentScreen,
+        selectScreen,
+        handleBackToProjects,
         addScreen,
         editScreen,
         deleteScreen,
