@@ -1,22 +1,22 @@
 import styles from './ProjectMenu.module.css';
 import useProjects from '../hooks/useProjects';
+import useProjectActions from '../hooks/useProjectActions';
+import useScreenActions from '../hooks/useScreenActions';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
 
 const ProjectMenu = ({ onScreenSelect }) => {
   const {
     projects,
+    setProjects,
     currentProjectId,
-    addProject,
-    deleteProject,
-    editProject,
+    setCurrentProjectId,
     selectProject,
-    addScreen,
-    deleteScreen,
-    editScreen,
     previousPage,
     currentProject,
   } = useProjects();
+  const { addProject, deleteProject, editProject } = useProjectActions(projects, setProjects, currentProjectId, setCurrentProjectId);
+  const { addScreen, deleteScreen, editScreen } = useScreenActions(projects, setProjects, currentProjectId, setCurrentProjectId);
 
   return (
     <div className={styles.projectMenu}>
