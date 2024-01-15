@@ -4,7 +4,7 @@ import TopBarContext from '../../context/TopBarContext';
 import PropTypes from 'prop-types';
 import styles from './Canvas.module.css';
 
-const Canvas = ({ squares, setSquares }) => {
+const Canvas = ({ squares, setSquares, loadData, storeScreenData }) => {
     const { selectedTool } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
@@ -17,6 +17,14 @@ const Canvas = ({ squares, setSquares }) => {
             setGridSize({x: rect.width / 20, y: rect.height / 40})
         }
     }
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    useEffect(() => {
+        storeScreenData();
+    }, [squares]);
 
     useEffect(() => {
         updateGridSize();
@@ -81,7 +89,9 @@ const Canvas = ({ squares, setSquares }) => {
 
 Canvas.propTypes = {
     squares: PropTypes.array.isRequired,
-    setSquares: PropTypes.func.isRequired
+    setSquares: PropTypes.func.isRequired,
+    loadData: PropTypes.func.isRequired,
+    storeScreenData: PropTypes.func.isRequired,
 };
 
 export default Canvas;

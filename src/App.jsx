@@ -4,7 +4,7 @@ import ScreenEditor from './components/ScreenEditor';
 import useProjects from './hooks/useProjects';
 
 function App() {
-  const { currentScreenId, setCurrentScreenId } = useProjects();
+  const { projects, setProjects, currentScreenId, setCurrentScreenId, currentProjectId, setCurrentProjectId } = useProjects();
 
   useEffect(() => {
     //prevent refresh page on swipe down
@@ -19,9 +19,9 @@ function App() {
   return (
     <div>
       {currentScreenId === null ? (
-        <ProjectMenu onScreenSelect={setCurrentScreenId} />
+        <ProjectMenu projects={projects} setProjects={setProjects} setCurrentScreenId={setCurrentScreenId} setCurrentProjectId={setCurrentProjectId} currentProjectId={currentProjectId} />
       ) : (
-        <ScreenEditor onBackToProjects={setCurrentScreenId} />
+        <ScreenEditor onBackToProjects={setCurrentScreenId} currentScreenId={currentScreenId} currentProjectId={currentProjectId} />
       )}
     </div>
   );

@@ -6,9 +6,9 @@ import { useState } from 'react';
 import styles from './ScreenEditor.module.css';
 import useProjects from '../hooks/useProjects';
 
-const ScreenEditor = ({ onBackToProjects }) => {
+const ScreenEditor = ({ onBackToProjects, currentScreenId, currentProjectId }) => {
     const [selectedTool, setSelectedTool] = useState('image');
-    const {screenData, setScreenData} = useProjects();
+    const {screenData, setScreenData, loadScreenData, updateScreenData} = useProjects();
     const handleAction = (action) => {
         if (action === 'undo') {
             setScreenData(prevSquares => prevSquares.slice(0, -1));
@@ -17,12 +17,20 @@ const ScreenEditor = ({ onBackToProjects }) => {
         }
     };
 
+    const storeScreenData = () => {
+        updateScreenData(currentProjectId, currentScreenId);
+    }
+
+    const loadData = () => {
+        loadScreenData(currentProjectId, currentScreenId);
+    }
+
     return (
         <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction }}>
             <div>
                 <TopBar onBackToProjects={() => onBackToProjects(null)} />
                 <div className={styles.container} >
-                    <Canvas squares={screenData} setSquares={setScreenData} />
+                    <Canvas squares={screenData} setSquares={setScreenData} loadData={loadData} storeScreenData={storeScreenData} />
                 </div>
             </div>
         </TopBarContext.Provider>
@@ -31,6 +39,8 @@ const ScreenEditor = ({ onBackToProjects }) => {
 
 ScreenEditor.propTypes = {
     onBackToProjects: PropTypes.func.isRequired,
+    currentScreenId: PropTypes.string.isRequired,
+    currentProjectId: PropTypes.string.isRequired,
 };
 
 export default ScreenEditor;

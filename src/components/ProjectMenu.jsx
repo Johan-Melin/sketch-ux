@@ -1,27 +1,13 @@
 import styles from './ProjectMenu.module.css';
-import useProjects from '../hooks/useProjects';
 import useProjectActions from '../hooks/useProjectActions';
 import useScreenActions from '../hooks/useScreenActions';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
 
-const ProjectMenu = ({ onScreenSelect }) => {
-  const {
-    projects,
-    setProjects,
-    currentProjectId,
-    setCurrentProjectId,
-    currentScreenId,
-    setCurrentScreenId,
-  } = useProjects();
+const ProjectMenu = ({ projects, setProjects, setCurrentScreenId, setCurrentProjectId, currentProjectId }) => {
   const { addProject, deleteProject, editProject, selectProject, previousPage } = useProjectActions(projects, setProjects, currentProjectId, setCurrentProjectId);
-  const { addScreen, deleteScreen, editScreen } = useScreenActions(projects, setProjects, currentProjectId, setCurrentProjectId, currentScreenId);
+  const { addScreen, deleteScreen, editScreen } = useScreenActions(projects, setProjects, currentProjectId);
   const currentProject = projects.find(project => project.id === currentProjectId);
-
-  const handleScreenSelect = (screen) => {
-    onScreenSelect(screen);
-    setCurrentScreenId(screen.id);
-  }
 
   return (
     <div className={styles.projectMenu}>
@@ -43,7 +29,7 @@ const ProjectMenu = ({ onScreenSelect }) => {
         <>
           <h2>{currentProject.name}</h2>
           {currentProject.screens.map((screen) => (
-            <div className={styles.project} key={screen.id} onClick={() => handleScreenSelect(screen)}>
+            <div className={styles.project} key={screen.id} onClick={() => setCurrentScreenId(screen.id)}>
               <span>{screen.name}</span>
               <div>
                 <FaEdit className={styles.icon} onClick={(event) => editScreen(screen.id, event)} />
@@ -60,7 +46,11 @@ const ProjectMenu = ({ onScreenSelect }) => {
 };
 
 ProjectMenu.propTypes = {
-  onScreenSelect: PropTypes.func.isRequired,
+  projects: PropTypes.array.isRequired,
+  setProjects: PropTypes.func.isRequired,
+  setCurrentScreenId: PropTypes.func.isRequired,
+  setCurrentProjectId: PropTypes.func.isRequired,
+  currentProjectId: PropTypes.string,
 };
 
 export default ProjectMenu;
