@@ -1,12 +1,14 @@
 import TopBar from './ScreenEditor/TopBar';
 import Canvas from './ScreenEditor/Canvas';
-import PropTypes from 'prop-types';
 import TopBarContext from '../context/TopBarContext';
 import { useState } from 'react';
 import styles from './ScreenEditor.module.css';
 import useProjects from '../hooks/useProjects';
+import { useContext } from "react";
+import { ProjectsContext } from "../context/ProjectsContext";
 
-const ScreenEditor = ({ onBackToProjects, currentScreenId, currentProjectId }) => {
+const ScreenEditor = () => {
+    const {setCurrentScreenId, currentScreenId, currentProjectId } = useContext(ProjectsContext);
     const [selectedTool, setSelectedTool] = useState('image');
     const {screenData, setScreenData, loadScreenData, updateScreenData} = useProjects();
     const handleAction = (action) => {
@@ -28,19 +30,13 @@ const ScreenEditor = ({ onBackToProjects, currentScreenId, currentProjectId }) =
     return (
         <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction }}>
             <div>
-                <TopBar onBackToProjects={() => onBackToProjects(null)} />
+                <TopBar onBackToProjects={() => setCurrentScreenId(null)} />
                 <div className={styles.container} >
                     <Canvas squares={screenData} setSquares={setScreenData} loadData={loadData} storeScreenData={storeScreenData} />
                 </div>
             </div>
         </TopBarContext.Provider>
     );
-};
-
-ScreenEditor.propTypes = {
-    onBackToProjects: PropTypes.func.isRequired,
-    currentScreenId: PropTypes.string.isRequired,
-    currentProjectId: PropTypes.string.isRequired,
 };
 
 export default ScreenEditor;

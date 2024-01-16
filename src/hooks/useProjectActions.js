@@ -1,4 +1,8 @@
-export default function useProjectActions(projects, setProjects, currentProjectId, setCurrentProjectId) {
+import { useContext } from "react";
+import { ProjectsContext } from "../context/ProjectsContext";
+
+export default function useProjectActions() {
+    const { projects, setProjects, currentProjectId, setCurrentProjectId } = useContext(ProjectsContext);
     const uuid = crypto.randomUUID();
     const addProject = () => {
         const projectName ="Project " + (projects.length + 1);

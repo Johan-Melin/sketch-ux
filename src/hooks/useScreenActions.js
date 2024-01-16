@@ -1,4 +1,8 @@
-export default function useScreenActions(projects, setProjects, currentProjectId) {
+import { useContext } from "react";
+import { ProjectsContext } from "../context/ProjectsContext";
+
+export default function useScreenActions() {
+    const { projects, setProjects, currentProjectId } = useContext(ProjectsContext);
     const uuid = crypto.randomUUID();
     const addScreen = () => {
         const currentProject = projects.find(project => project.id === currentProjectId);

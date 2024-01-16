@@ -1,12 +1,14 @@
 import styles from './ProjectMenu.module.css';
 import useProjectActions from '../hooks/useProjectActions';
 import useScreenActions from '../hooks/useScreenActions';
-import PropTypes from 'prop-types';
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
+import { useContext } from "react";
+import { ProjectsContext } from "../context/ProjectsContext";
 
-const ProjectMenu = ({ projects, setProjects, setCurrentScreenId, setCurrentProjectId, currentProjectId }) => {
-  const { addProject, deleteProject, editProject, selectProject, previousPage } = useProjectActions(projects, setProjects, currentProjectId, setCurrentProjectId);
-  const { addScreen, deleteScreen, editScreen } = useScreenActions(projects, setProjects, currentProjectId);
+const ProjectMenu = () => {
+  const { projects, setCurrentScreenId, currentProjectId } = useContext(ProjectsContext);
+  const { addProject, deleteProject, editProject, selectProject, previousPage } = useProjectActions();
+  const { addScreen, deleteScreen, editScreen } = useScreenActions();
   const currentProject = projects.find(project => project.id === currentProjectId);
 
   return (
@@ -43,14 +45,6 @@ const ProjectMenu = ({ projects, setProjects, setCurrentScreenId, setCurrentProj
       )}
     </div>
   );
-};
-
-ProjectMenu.propTypes = {
-  projects: PropTypes.array.isRequired,
-  setProjects: PropTypes.func.isRequired,
-  setCurrentScreenId: PropTypes.func.isRequired,
-  setCurrentProjectId: PropTypes.func.isRequired,
-  currentProjectId: PropTypes.string,
 };
 
 export default ProjectMenu;

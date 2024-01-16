@@ -2,9 +2,11 @@ import { useEffect } from 'react';
 import ProjectMenu from './components/ProjectMenu';
 import ScreenEditor from './components/ScreenEditor';
 import useProjects from './hooks/useProjects';
+import { ProjectsContext } from "./context/ProjectsContext";
 
 function App() {
-  const { projects, setProjects, currentScreenId, setCurrentScreenId, currentProjectId, setCurrentProjectId } = useProjects();
+  const projectsData = useProjects();
+  const { currentScreenId } = projectsData;
 
   useEffect(() => {
     //prevent refresh page on swipe down
@@ -17,13 +19,13 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <ProjectsContext.Provider value={projectsData}>
       {currentScreenId === null ? (
-        <ProjectMenu projects={projects} setProjects={setProjects} setCurrentScreenId={setCurrentScreenId} setCurrentProjectId={setCurrentProjectId} currentProjectId={currentProjectId} />
+        <ProjectMenu />
       ) : (
-        <ScreenEditor onBackToProjects={setCurrentScreenId} currentScreenId={currentScreenId} currentProjectId={currentProjectId} />
+        <ScreenEditor />
       )}
-    </div>
+    </ProjectsContext.Provider>
   );
 }
 
