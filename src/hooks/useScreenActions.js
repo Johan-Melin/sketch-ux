@@ -5,7 +5,7 @@ export default function useScreenActions(projects, setProjects, currentProjectId
         const screenName = "Screen " + (currentProject.screens.length + 1);
         setProjects(prevProjects => prevProjects.map(project =>
         project.id === currentProjectId
-            ? { ...project, screens: [...project.screens, { id: uuid, name: screenName, rect: [] }] }
+            ? { ...project, screens: [{ id: uuid, name: screenName, rect: [] }, ...project.screens] }
             : project
         ));
     };
@@ -15,14 +15,13 @@ export default function useScreenActions(projects, setProjects, currentProjectId
         const newName = prompt('Enter new screen name');
         if (newName !== null && newName !== '') {
             setProjects(prevProjects =>
-            prevProjects.map(project =>
-                project.id === currentProjectId ? {
-                ...project,
-                screens: project.screens.map(screen =>
-                    screen.id === screenId ? { ...screen, name: newName } : screen
+                prevProjects.map(project =>
+                    project.id === currentProjectId ? {
+                    ...project,
+                    screens: project.screens.map(screen =>
+                        screen.id === screenId ? { ...screen, name: newName } : screen
+                    )} : project
                 )
-                } : project
-            )
             );
         }
     };

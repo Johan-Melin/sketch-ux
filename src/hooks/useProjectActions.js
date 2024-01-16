@@ -2,7 +2,7 @@ export default function useProjectActions(projects, setProjects, currentProjectI
     const uuid = crypto.randomUUID();
     const addProject = () => {
         const projectName ="Project " + (projects.length + 1);
-        setProjects(prevProjects => [...prevProjects, { id: uuid, name: projectName, screens: [] }]);
+        setProjects(prevProjects => [{ id: uuid, name: projectName, screens: [] }, ...prevProjects]);
     };
     
     const editProject = (projectId, event) => {
