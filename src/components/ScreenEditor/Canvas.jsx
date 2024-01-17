@@ -1,14 +1,17 @@
 import { useState, useRef, useContext, useEffect } from 'react';
 import Square from './Square';
 import TopBarContext from '../../context/TopBarContext';
-import PropTypes from 'prop-types';
 import styles from './Canvas.module.css';
+import useRectActions from "../../hooks/useRectActions";
+import { ProjectsContext } from "../../context/ProjectsContext";
 
-const Canvas = ({ squares, setSquares, loadData, storeScreenData }) => {
+const Canvas = () => {
     const { selectedTool } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const canvasRef = useRef();
+    const { addRect } = useRectActions();
+    const { currentScreen } = useContext(ProjectsContext);
 
     const updateGridSize = () => {
         if (canvasRef.current) {
@@ -17,14 +20,6 @@ const Canvas = ({ squares, setSquares, loadData, storeScreenData }) => {
             setGridSize({x: rect.width / 20, y: rect.height / 40})
         }
     }
-
-    useEffect(() => {
-        loadData();
-    }, []);
-
-    useEffect(() => {
-        storeScreenData();
-    }, [squares]);
 
     useEffect(() => {
         updateGridSize();
@@ -63,7 +58,7 @@ const Canvas = ({ squares, setSquares, loadData, storeScreenData }) => {
 
     const handleMouseUp = () => {
         if (currentSquare) {
-            setSquares(prevSquares => [...prevSquares, currentSquare]);
+            addRect(currentSquare);
             setCurrentSquare(null);
         }
     };
@@ -79,7 +74,7 @@ const Canvas = ({ squares, setSquares, loadData, storeScreenData }) => {
             onTouchEnd={handleMouseUp}
             className={`${styles.canvas} ${styles.grid}`}
         >
-            {squares.map((square, index) => (
+            {currentScreen.rect.map((square, index) => (
                 <Square key={index} square={square} gridSize={gridSize} />
             ))}
             {currentSquare && ( <Square square={currentSquare} gridSize={gridSize} /> )}
@@ -87,11 +82,5 @@ const Canvas = ({ squares, setSquares, loadData, storeScreenData }) => {
     );
 };
 
-Canvas.propTypes = {
-    squares: PropTypes.array.isRequired,
-    setSquares: PropTypes.func.isRequired,
-    loadData: PropTypes.func.isRequired,
-    storeScreenData: PropTypes.func.isRequired,
-};
 
 export default Canvas;

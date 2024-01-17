@@ -7,25 +7,8 @@ export default function useProjects() {
     });
     const [currentProjectId, setCurrentProjectId] = useState(null);
     const [currentScreenId, setCurrentScreenId] = useState(null);
-    const [screenData, setScreenData] = useState([]);
-
-    const updateScreenData = (projectId, screenId) => {
-        setProjects(prevProjects =>
-            prevProjects.map(project =>
-                project.id === projectId ? {
-                ...project,
-                screens: project.screens.map(screen =>
-                    screen.id === screenId ? { ...screen, rect: screenData } : screen
-                )} : project
-            )
-        );
-    }
-
-    const loadScreenData = (projectId, screenId) => {
-        const project = projects.find(project => project.id === projectId);
-        const screen = project.screens.find(screen => screen.id === screenId);
-        setScreenData(screen.rect);
-      };
+    const currentProject = currentProjectId && projects.find(project => project.id === currentProjectId);
+    const currentScreen = currentScreenId && currentProject && currentProject.screens.find(screen => screen.id === currentScreenId);
 
     useEffect(() => {
         localStorage.setItem('projects', JSON.stringify(projects));
@@ -38,9 +21,6 @@ export default function useProjects() {
         setCurrentProjectId,
         currentScreenId,
         setCurrentScreenId,
-        screenData,
-        setScreenData,
-        loadScreenData,
-        updateScreenData,
+        currentScreen,
     };
 }
