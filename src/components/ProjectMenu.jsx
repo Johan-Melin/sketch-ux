@@ -1,7 +1,7 @@
 import styles from './ProjectMenu.module.css';
 import useProjectActions from '../hooks/useProjectActions';
 import useScreenActions from '../hooks/useScreenActions';
-import { FaEdit, FaTrash } from 'react-icons/fa'; 
+import { FaPen, FaTrash } from 'react-icons/fa'; 
 import { useContext } from "react";
 import { ProjectsContext } from "../context/ProjectsContext";
 
@@ -20,7 +20,7 @@ const ProjectMenu = () => {
             <div className={styles.project} key={project.id} onClick={() => selectProject(project)}>
               <span>{project.name}</span>
               <div>
-                <FaEdit className={styles.icon} onClick={(event) => editProject(project.id, event)} />
+                <FaPen className={styles.icon} onClick={(event) => editProject(project.id, event)} />
                 <FaTrash className={styles.icon} onClick={(event) => deleteProject(project.id, event)} />
               </div>
             </div>
@@ -34,7 +34,7 @@ const ProjectMenu = () => {
             <div className={styles.project} key={screen.id} onClick={() => setCurrentScreenId(screen.id)}>
               <span>{screen.name}</span>
               <div>
-                <FaEdit className={styles.icon} onClick={(event) => editScreen(screen.id, event)} />
+                <FaPen className={styles.icon} onClick={(event) => editScreen(screen.id, event)} />
                 <FaTrash className={styles.icon} onClick={(event) => deleteScreen(screen.id, event)} />
               </div>
             </div>

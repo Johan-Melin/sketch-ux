@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
 import { TOOLS, ACTIONS } from '../../constants/tools';
-import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaRegObjectUngroup, FaTrash, FaFile } from 'react-icons/fa'; 
+import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaFile } from 'react-icons/fa'; 
 function TopBar({ onBackToProjects }) {
     const { setSelectedTool, handleAction } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT } = TOOLS;
@@ -34,7 +34,7 @@ function TopBar({ onBackToProjects }) {
                 <div className={styles.row}>
                     {isEditMode && <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} Icon={FaFile} />}
                     <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} Icon={FaUndo} />
-                    <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaRegObjectUngroup} />
+                    <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaEdit} />
                 </div>
         </div>
     );
