@@ -1,19 +1,22 @@
 .rect {
     position: absolute;
-    z-index: 1;
     border-radius: 5px;
 }
 
 .text {
     background-color: var(--rect-text);
+    z-index: 2;
 }
 
 .image {
     background-color: var(--rect-image); 
+    z-index: 1;
 }
 
 .input {
+    box-sizing: border-box;
     border-style: solid;
     border-width: 2px;
     border-color: var(--rect-border);
+    z-index: 2;
 }
