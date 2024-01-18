@@ -6,7 +6,7 @@ import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
 
 const Canvas = () => {
-    const { selectedTool, isEditMode, canvasRef } = useContext(TopBarContext);   
+    const { selectedTool, isEditMode, canvasRef, isPlayMode } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const { addRect } = useRectActions();
@@ -73,7 +73,7 @@ const Canvas = () => {
             onTouchStart={handleMouseDown} 
             onTouchMove={handleMouseMove} 
             onTouchEnd={handleMouseUp}
-            className={`${styles.canvas} ${styles.grid}`}
+            className={`${styles.canvas} ${isPlayMode ? '' : styles.grid}`}
         >
             {currentScreen.rect.map((square, index) => (
                 <Square key={index} square={square} gridSize={gridSize} />
