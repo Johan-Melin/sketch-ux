@@ -6,7 +6,7 @@ import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
 
 const Canvas = () => {
-    const { selectedTool } = useContext(TopBarContext);   
+    const { selectedTool, isEditMode } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const canvasRef = useRef();
@@ -41,11 +41,13 @@ const Canvas = () => {
     }
 
     const handleMouseDown = (event) => {
+        if (isEditMode) return;
         const { x, y } = drawElement(event);
         setCurrentSquare({ x, y, width: 0, height: 0, tool: selectedTool });
     };
 
     const handleMouseMove = (event) => {
+        if (isEditMode) return;
         if (currentSquare) {
             const { x, y } = drawElement(event);
             setCurrentSquare({
@@ -57,6 +59,7 @@ const Canvas = () => {
     };
 
     const handleMouseUp = () => {
+        if (isEditMode) return;
         if (currentSquare) {
             addRect(currentSquare);
             setCurrentSquare(null);

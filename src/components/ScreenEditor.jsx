@@ -10,6 +10,8 @@ import useRectActions from "../hooks/useRectActions";
 const ScreenEditor = () => {
     const {setCurrentScreenId } = useContext(ProjectsContext);
     const [selectedTool, setSelectedTool] = useState('image');
+    const [isEditMode, setIsEditMode] = useState(false);
+
     const { undoRect, clearRect } = useRectActions();
     const handleAction = (action) => {
         if (action === 'undo') {
@@ -20,7 +22,7 @@ const ScreenEditor = () => {
     };
 
     return (
-        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction }}>
+        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, isEditMode, setIsEditMode }}>
             <div>
                 <TopBar onBackToProjects={() => setCurrentScreenId(null)} />
                 <div className={styles.container} >

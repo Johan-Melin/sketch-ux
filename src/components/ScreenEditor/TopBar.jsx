@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 import TopBarContext from '../../context/TopBarContext';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
 import { TOOLS, ACTIONS } from '../../constants/tools';
 import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaFile } from 'react-icons/fa'; 
 function TopBar({ onBackToProjects }) {
-    const { setSelectedTool, handleAction } = useContext(TopBarContext);
+    const { setSelectedTool, handleAction, isEditMode, setIsEditMode } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT } = TOOLS;
     const { UNDO, CLEAR } = ACTIONS;
-    const [isEditMode, setIsEditMode] = useState(false);
     
     const handleEditClick = () => {
         setIsEditMode(!isEditMode);
@@ -34,7 +33,7 @@ function TopBar({ onBackToProjects }) {
                 <div className={styles.row}>
                     {isEditMode && <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} Icon={FaFile} />}
                     <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} Icon={FaUndo} />
-                    <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaEdit} />
+                    <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaEdit} isToggled={isEditMode} />
                 </div>
         </div>
     );

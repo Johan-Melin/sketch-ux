@@ -3,9 +3,9 @@ import styles from './TopBarButton.module.css';
 import TopBarContext from '../../context/TopBarContext';
 import { useContext } from 'react';
 
-function TopBarButton({ name, handleClick, Icon }) {
+function TopBarButton({ name, handleClick, Icon, isToggled  }) {
     const { selectedTool } = useContext(TopBarContext);
-    const active = selectedTool === name;
+    const active = selectedTool === name || isToggled;
     
     const buttonClassName = `${styles.topBarButton} ${active ? styles.active : ''}`;
     
@@ -18,6 +18,7 @@ TopBarButton.propTypes = {
     name: PropTypes.string.isRequired,
     handleClick: PropTypes.func.isRequired,
     Icon: PropTypes.elementType,
+    isToggled: PropTypes.bool,
 };
 
 export default TopBarButton
