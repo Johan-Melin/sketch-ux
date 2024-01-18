@@ -7,4 +7,5 @@ export const TOOLS = {
 export const ACTIONS = {
     UNDO: 'undo',
     CLEAR: 'clear',
+    SCREENSHOT: 'screenshot',
 }

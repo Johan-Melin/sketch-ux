@@ -1,4 +1,4 @@
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Square from './Square';
 import TopBarContext from '../../context/TopBarContext';
 import styles from './Canvas.module.css';
@@ -6,22 +6,20 @@ import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
 
 const Canvas = () => {
-    const { selectedTool, isEditMode } = useContext(TopBarContext);   
+    const { selectedTool, isEditMode, canvasRef } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
-    const canvasRef = useRef();
     const { addRect } = useRectActions();
     const { currentScreen } = useContext(ProjectsContext);
 
-    const updateGridSize = () => {
-        if (canvasRef.current) {
-            const rect = canvasRef.current.getBoundingClientRect();
-            // index.css grid-size = 5% x 2.5%
-            setGridSize({x: rect.width / 20, y: rect.height / 40})
-        }
-    }
-
     useEffect(() => {
+        const updateGridSize = () => {
+            if (canvasRef.current) {
+                const rect = canvasRef.current.getBoundingClientRect();
+                // index.css grid-size = 5% x 2.5%
+                setGridSize({x: rect.width / 20, y: rect.height / 40})
+            }
+        }
         updateGridSize();
         window.addEventListener('resize', updateGridSize);
 
