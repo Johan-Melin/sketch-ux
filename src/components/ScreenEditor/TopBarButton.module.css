@@ -6,9 +6,11 @@
     cursor: pointer;
 }
 
-.topBarButton:hover {
-    background-color: var(--topbar-btn-active);
-}
+@media (min-width: 768px) {
+    .topBarButton:hover {
+        background-color: var(--topbar-btn-active);
+    }
+  }
 
 .active {
     background-color: var(--topbar-btn-active);

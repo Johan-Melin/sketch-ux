@@ -21,8 +21,8 @@
   --project-border: #ccc;
   --topbar-bg: #666;
   --topbar-btn-active: #0056b3;
-  --canvas-bg: #d3d3d3;
-  --grid-color: #ccc;
+  --canvas-bg: #fff;
+  --grid-color: #eee;
   --rect-text: #555;
   --rect-image: #999;
   --rect-border: #333;
@@ -43,10 +43,6 @@ button {
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
   a:hover {
     color: #747bff;
   }
