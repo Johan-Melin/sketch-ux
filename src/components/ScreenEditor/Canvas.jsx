@@ -4,9 +4,10 @@ import TopBarContext from '../../context/TopBarContext';
 import styles from './Canvas.module.css';
 import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
+import Icons from './Icons';
 
 const Canvas = () => {
-    const { selectedTool, isEditMode, canvasRef, isPlayMode } = useContext(TopBarContext);   
+    const { selectedTool, isEditMode, canvasRef, isPlayMode, displayIconModal } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const { addRect } = useRectActions();
@@ -75,6 +76,7 @@ const Canvas = () => {
             onTouchEnd={handleMouseUp}
             className={`${styles.canvas} ${isPlayMode ? '' : styles.grid}`}
         >
+            {displayIconModal && <Icons />}
             {currentScreen.rect.map((square, index) => (
                 <Square key={index} square={square} gridSize={gridSize} />
             ))}
