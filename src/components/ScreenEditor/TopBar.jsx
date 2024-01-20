@@ -5,10 +5,14 @@ import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
 import { TOOLS, ACTIONS } from '../../constants/tools';
 import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaFile, FaPlay, FaCamera, FaIcons } from 'react-icons/fa'; 
+import {ICONS} from '../../constants/icons';
+
 function TopBar({ onBackToProjects }) {
-    const { setSelectedTool, handleAction, isEditMode, setIsEditMode, isPlayMode, setIsPlayMode, setDisplayIconModal } = useContext(TopBarContext);
+    const { setSelectedTool, handleAction, isEditMode, setIsEditMode, isPlayMode, setIsPlayMode, setDisplayIconModal, selectedIconName } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT, ICON } = TOOLS;
     const { UNDO, CLEAR, SCREENSHOT } = ACTIONS;
+
+    const SelectedIcon = ICONS[selectedIconName] || FaIcons;
     
     const handleEditClick = () => {
         setIsEditMode(prev => !prev);
@@ -35,7 +39,7 @@ function TopBar({ onBackToProjects }) {
                             <TopBarButton name="text" handleClick={() => setSelectedTool(TEXT)} Icon={FaFont} />
                             <TopBarButton name="image" handleClick={() => setSelectedTool(IMAGE)} Icon={FaSquare} />
                             <TopBarButton name="input" handleClick={() => setSelectedTool(INPUT)} Icon={FaRegSquare} />
-                            <TopBarButton name="icon" handleClick={handleDisplayIconModalClick} Icon={FaIcons} />
+                            <TopBarButton name="icon" handleClick={handleDisplayIconModalClick} Icon={SelectedIcon} />
                         </>
                      )}
                     </>

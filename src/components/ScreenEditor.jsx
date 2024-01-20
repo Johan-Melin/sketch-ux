@@ -14,6 +14,7 @@ const ScreenEditor = () => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [isPlayMode, setIsPlayMode] = useState(false);
     const [displayIconModal, setDisplayIconModal] = useState(false);
+    const [selectedIconName, setSelectedIconName] = useState('FaIcons');
     const { undoRect, clearRect } = useRectActions();
     const canvasRef = useRef();
 
@@ -40,7 +41,7 @@ const ScreenEditor = () => {
     };
 
     return (
-        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, isEditMode, setIsEditMode, isPlayMode, setIsPlayMode, canvasRef, displayIconModal, setDisplayIconModal }}>
+        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, isEditMode, setIsEditMode, isPlayMode, setIsPlayMode, canvasRef, displayIconModal, setDisplayIconModal, selectedIconName, setSelectedIconName }}>
             <div>
                 <TopBar onBackToProjects={() => setCurrentScreenId(null)} />
                 <div className={styles.container} >

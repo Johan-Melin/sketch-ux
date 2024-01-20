@@ -40,13 +40,13 @@ const Canvas = () => {
     }
 
     const handleMouseDown = (event) => {
-        if (isEditMode) return;
+        if (isEditMode || displayIconModal) return;
         const { x, y } = drawElement(event);
         setCurrentSquare({ x, y, width: 0, height: 0, tool: selectedTool });
     };
 
     const handleMouseMove = (event) => {
-        if (isEditMode) return;
+        if (isEditMode || displayIconModal) return;
         if (currentSquare) {
             const { x, y } = drawElement(event);
             setCurrentSquare({
@@ -58,7 +58,7 @@ const Canvas = () => {
     };
 
     const handleMouseUp = () => {
-        if (isEditMode) return;
+        if (isEditMode || displayIconModal) return;
         if (currentSquare) {
             addRect(currentSquare);
             setCurrentSquare(null);
