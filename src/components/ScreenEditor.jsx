@@ -12,7 +12,7 @@ const ScreenEditor = () => {
     const {setCurrentScreenId} = useContext(ProjectsContext);
     const [selectedTool, setSelectedTool] = useState('image');
     const [mode, setMode] = useState("create");
-    const [displayIconModal, setDisplayIconModal] = useState(false);
+    const [displayModal, setDisplayModal] = useState(null);
     const [selectedIconName, setSelectedIconName] = useState('FaIcons');
     const [selectedRect, setSelectedRect] = useState(null);
     const { undoRect, clearRect } = useRectActions();
@@ -22,7 +22,10 @@ const ScreenEditor = () => {
         if (mode !== "edit") {
           setSelectedRect(null);
         }
-      }, [mode]);
+        if (mode !== "create") {
+            setDisplayModal(null);
+          }
+        }, [mode]);
 
     const handleScreenshot = () => {
         const canvasElement = canvasRef.current;
@@ -47,7 +50,7 @@ const ScreenEditor = () => {
     };
 
     return (
-        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, mode, setMode, canvasRef, displayIconModal, setDisplayIconModal, selectedIconName, setSelectedIconName, selectedRect, setSelectedRect }}>
+        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, mode, setMode, canvasRef, displayModal, setDisplayModal, selectedIconName, setSelectedIconName, selectedRect, setSelectedRect }}>
             <div>
                 <TopBar onBackToProjects={() => setCurrentScreenId(null)} />
                 <div className={styles.container} >

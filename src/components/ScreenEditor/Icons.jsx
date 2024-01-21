@@ -5,10 +5,10 @@ import TopBarContext from '../../context/TopBarContext';
 import { useContext } from 'react';
 
 function Icons() {
-    const { setDisplayIconModal, setSelectedIconName } = useContext(TopBarContext);
+    const { setDisplayModal, setSelectedIconName } = useContext(TopBarContext);
     const IconComponent = ({ Icon, name }) => {
         const chooseIcon = (name) => {
-            setDisplayIconModal(false);
+            setDisplayModal(null);
             setSelectedIconName(name);
         }
 

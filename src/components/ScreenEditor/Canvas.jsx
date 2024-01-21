@@ -7,12 +7,12 @@ import { ProjectsContext } from "../../context/ProjectsContext";
 import Icons from './Icons';
 
 const Canvas = () => {
-    const { selectedTool, mode, canvasRef, displayIconModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);   
+    const { selectedTool, mode, canvasRef, displayModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const { addRect } = useRectActions();
     const { currentScreen } = useContext(ProjectsContext);
-    const canCreate = mode === "create" && !displayIconModal;
+    const canCreate = mode === "create" && !displayModal;
 
     const handleRectClick = (rect) => {
         if (mode !== "edit") return;
@@ -84,7 +84,7 @@ const Canvas = () => {
             onTouchEnd={handleMouseUp}
             className={`${styles.canvas} ${mode === "play" ? '' : styles.grid}`}
         >
-            {displayIconModal && <Icons />}
+            {displayModal === "icon" && <Icons />}
             {currentScreen.rect.map((square, index) => (
                 <Square key={index} square={square} gridSize={gridSize} onClick={() => handleRectClick(square)} isSelected={selectedRect && selectedRect.id === square.id} />
             ))}
