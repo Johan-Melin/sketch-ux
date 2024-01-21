@@ -3,10 +3,10 @@ import { ProjectsContext } from "../context/ProjectsContext";
 
 export default function useScreenActions() {
     const { projects, setProjects, currentProjectId } = useContext(ProjectsContext);
-    const uuid = crypto.randomUUID();
     const addScreen = () => {
         const currentProject = projects.find(project => project.id === currentProjectId);
         const screenName = "Screen " + (currentProject.screens.length + 1);
+        const uuid = crypto.randomUUID();
         setProjects(prevProjects => prevProjects.map(project =>
         project.id === currentProjectId
             ? { ...project, screens: [{ id: uuid, name: screenName, rect: [] }, ...project.screens] }
