@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ProjectsContext } from "../context/ProjectsContext";
 
 export default function useScreenActions() {
-    const { projects, setProjects, currentProjectId } = useContext(ProjectsContext);
+    const { projects, setProjects, currentProjectId, currentScreenId } = useContext(ProjectsContext);
     const addScreen = () => {
         const currentProject = projects.find(project => project.id === currentProjectId);
         const screenName = "Screen " + (currentProject.screens.length + 1);
@@ -39,9 +39,39 @@ export default function useScreenActions() {
         ));
     };
 
+    const checkName = (name, project) => {
+        const similarNames = project.screens.filter(screen => screen.name.startsWith(name)).map(screen => screen.name);
+        let counter = 1;
+        let newName;
+        do {
+            newName = `${name} Copy (${counter})`;
+            counter++;
+        } while (similarNames.includes(newName));
+        return newName;
+    };
+
+    const copyScreen = () => {
+        const uuid = crypto.randomUUID();
+        setProjects(projects => projects.map(project => {
+            if (project.id === currentProjectId) {
+                const currentScreen = project.screens.find(screen => screen.id === currentScreenId);
+                return { 
+                    ...project, 
+                    screens: [...project.screens, 
+                              {...currentScreen, 
+                               id: uuid,
+                               name: checkName(currentScreen.name, project)}] 
+                };
+            } else {
+                return project;
+            }
+        }));
+    };
+
     return {
         addScreen,
         editScreen,
         deleteScreen,
+        copyScreen,
     };
 }

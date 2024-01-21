@@ -7,12 +7,13 @@ import { TOOLS, ACTIONS } from '../../constants/tools';
 import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaLink, FaTimesCircle, FaPlay, FaCamera, FaIcons } from 'react-icons/fa'; 
 import {ICONS} from '../../constants/icons';
 import useRectActions from '../../hooks/useRectActions';
-
+import useScreenActions from '../../hooks/useScreenActions';
 function TopBar({ onBackToProjects }) {
     const { setSelectedTool, handleAction, mode, setMode, setDisplayIconModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT, ICON } = TOOLS;
     const { UNDO, CLEAR, SCREENSHOT } = ACTIONS;
     const { deleteRect } = useRectActions();
+    const { copyScreen } = useScreenActions();
 
     const SelectedIcon = ICONS[selectedIconName] || FaIcons;
     
@@ -41,7 +42,7 @@ function TopBar({ onBackToProjects }) {
                 {mode === "edit" && selectedRect && (
                     <>
                         <TopBarButton name="delete" handleClick={handleDeleteClick} Icon={FaTrash} />
-                        <TopBarButton name="link" handleClick={() => []} Icon={FaLink} />
+                        <TopBarButton name="link" handleClick={copyScreen} Icon={FaLink} />
                     </>
                 )}
                 {mode === "create" && (
