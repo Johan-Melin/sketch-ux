@@ -9,7 +9,7 @@ import {ICONS} from '../../constants/icons';
 import useRectActions from '../../hooks/useRectActions';
 
 function TopBar({ onBackToProjects }) {
-    const { setSelectedTool, handleAction, isEditMode, setIsEditMode, isPlayMode, setIsPlayMode, setDisplayIconModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);
+    const { setSelectedTool, handleAction, mode, setMode, setDisplayIconModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT, ICON } = TOOLS;
     const { UNDO, CLEAR, SCREENSHOT } = ACTIONS;
     const { deleteRect } = useRectActions();
@@ -17,11 +17,11 @@ function TopBar({ onBackToProjects }) {
     const SelectedIcon = ICONS[selectedIconName] || FaIcons;
     
     const handleEditClick = () => {
-        setIsEditMode(prev => !prev);
+        setMode(prev => prev === 'edit' ? 'create' : 'edit');
     };
 
     const handlePlayClick = () => {
-        setIsPlayMode(prev => !prev);
+        setMode(prev => prev === 'play' ? 'create' : 'play');
     };
 
     const handleDisplayIconModalClick = () => {
@@ -38,7 +38,7 @@ function TopBar({ onBackToProjects }) {
         <div className={styles.topBar}>
             <div className={styles.row}>
                 <TopBarButton name="back" handleClick={onBackToProjects} Icon={FaArrowLeft} />
-                {isEditMode ? (
+                {mode === "edit" ? (
                     selectedRect && <>
                         <TopBarButton name="delete" handleClick={handleDeleteClick} Icon={FaTrash} />
                         <TopBarButton name="link" handleClick={() => []} Icon={FaLink} />
@@ -46,7 +46,7 @@ function TopBar({ onBackToProjects }) {
                 ) 
                 : (
                 <>
-                    {!isPlayMode && (
+                    {mode !== "play" && (
                     <>
                         <TopBarButton name="text" handleClick={() => setSelectedTool(TEXT)} Icon={FaFont} />
                         <TopBarButton name="image" handleClick={() => setSelectedTool(IMAGE)} Icon={FaSquare} />
@@ -58,16 +58,16 @@ function TopBar({ onBackToProjects }) {
             )}
             </div>
             <div className={styles.row}>
-                {isEditMode && <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} Icon={FaTimesCircle} />}
-                {isPlayMode ?
+                {mode === "edit" && <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} Icon={FaTimesCircle} />}
+                {mode === "play" ?
                     <TopBarButton name="screenshot" handleClick={() => handleAction(SCREENSHOT)} Icon={FaCamera} />
                     : (
                     <>              
                         <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} Icon={FaUndo} />
-                        <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaEdit} isToggled={isEditMode} />
+                        <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaEdit} isToggled={mode === "edit"} />
                     </>
                 )}
-                <TopBarButton name="edit" handleClick={handlePlayClick} Icon={FaPlay} isToggled={isPlayMode} />
+                <TopBarButton name="edit" handleClick={handlePlayClick} Icon={FaPlay} isToggled={mode === "play"} />
             </div>
         </div>
     );

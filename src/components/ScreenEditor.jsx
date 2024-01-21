@@ -11,8 +11,7 @@ import html2canvas from 'html2canvas';
 const ScreenEditor = () => {
     const {setCurrentScreenId} = useContext(ProjectsContext);
     const [selectedTool, setSelectedTool] = useState('image');
-    const [isEditMode, setIsEditMode] = useState(false);
-    const [isPlayMode, setIsPlayMode] = useState(false);
+    const [mode, setMode] = useState("create");
     const [displayIconModal, setDisplayIconModal] = useState(false);
     const [selectedIconName, setSelectedIconName] = useState('FaIcons');
     const [selectedRect, setSelectedRect] = useState(null);
@@ -20,10 +19,10 @@ const ScreenEditor = () => {
     const canvasRef = useRef();
 
     useEffect(() => {
-        if (!isEditMode) {
+        if (mode !== "edit") {
           setSelectedRect(null);
         }
-      }, [isEditMode]);
+      }, [mode]);
 
     const handleScreenshot = () => {
         const canvasElement = canvasRef.current;
@@ -48,7 +47,7 @@ const ScreenEditor = () => {
     };
 
     return (
-        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, isEditMode, setIsEditMode, isPlayMode, setIsPlayMode, canvasRef, displayIconModal, setDisplayIconModal, selectedIconName, setSelectedIconName, selectedRect, setSelectedRect }}>
+        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, mode, setMode, canvasRef, displayIconModal, setDisplayIconModal, selectedIconName, setSelectedIconName, selectedRect, setSelectedRect }}>
             <div>
                 <TopBar onBackToProjects={() => setCurrentScreenId(null)} />
                 <div className={styles.container} >
