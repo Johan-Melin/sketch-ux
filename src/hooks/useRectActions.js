@@ -29,9 +29,14 @@ export default function useRectActions() {
         modifyRect(prevRect => prevRect.slice(0, -1));
     };
 
+    const deleteRect = (id) => {
+        modifyRect(prevRect => prevRect.filter(rect => rect.id !== id));
+    };
+
     return { 
         addRect,
         clearRect, 
         undoRect,
+        deleteRect,
     };
 }

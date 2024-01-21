@@ -7,24 +7,17 @@ import { ProjectsContext } from "../../context/ProjectsContext";
 import Icons from './Icons';
 
 const Canvas = () => {
-    const { selectedTool, isEditMode, canvasRef, isPlayMode, displayIconModal, selectedIconName } = useContext(TopBarContext);   
+    const { selectedTool, isEditMode, canvasRef, isPlayMode, displayIconModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const { addRect } = useRectActions();
     const { currentScreen } = useContext(ProjectsContext);
     const canCreate = !isEditMode && !isPlayMode && !displayIconModal;
-    const [selectedRect, setSelectedRect] = useState(null);
 
     const handleRectClick = (rect) => {
         if (!isEditMode) return;
         setSelectedRect(rect);
     };
-
-    useEffect(() => {
-        if (!isEditMode) {
-          setSelectedRect(null);
-        }
-      }, [isEditMode]);
 
     useEffect(() => {
         const updateGridSize = () => {

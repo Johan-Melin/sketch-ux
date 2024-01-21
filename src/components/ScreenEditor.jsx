@@ -1,7 +1,7 @@
 import TopBar from './ScreenEditor/TopBar';
 import Canvas from './ScreenEditor/Canvas';
 import TopBarContext from '../context/TopBarContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './ScreenEditor.module.css';
 import { useContext, useRef } from "react";
 import { ProjectsContext } from "../context/ProjectsContext";
@@ -15,8 +15,15 @@ const ScreenEditor = () => {
     const [isPlayMode, setIsPlayMode] = useState(false);
     const [displayIconModal, setDisplayIconModal] = useState(false);
     const [selectedIconName, setSelectedIconName] = useState('FaIcons');
+    const [selectedRect, setSelectedRect] = useState(null);
     const { undoRect, clearRect } = useRectActions();
     const canvasRef = useRef();
+
+    useEffect(() => {
+        if (!isEditMode) {
+          setSelectedRect(null);
+        }
+      }, [isEditMode]);
 
     const handleScreenshot = () => {
         const canvasElement = canvasRef.current;
@@ -41,7 +48,7 @@ const ScreenEditor = () => {
     };
 
     return (
-        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, isEditMode, setIsEditMode, isPlayMode, setIsPlayMode, canvasRef, displayIconModal, setDisplayIconModal, selectedIconName, setSelectedIconName }}>
+        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, isEditMode, setIsEditMode, isPlayMode, setIsPlayMode, canvasRef, displayIconModal, setDisplayIconModal, selectedIconName, setSelectedIconName, selectedRect, setSelectedRect }}>
             <div>
                 <TopBar onBackToProjects={() => setCurrentScreenId(null)} />
                 <div className={styles.container} >
