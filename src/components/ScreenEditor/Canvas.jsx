@@ -7,7 +7,7 @@ import { ProjectsContext } from "../../context/ProjectsContext";
 import Icons from './Icons';
 
 const Canvas = () => {
-    const { selectedTool, isEditMode, canvasRef, isPlayMode, displayIconModal } = useContext(TopBarContext);   
+    const { selectedTool, isEditMode, canvasRef, isPlayMode, displayIconModal, selectedIconName } = useContext(TopBarContext);   
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const { addRect } = useRectActions();
@@ -42,7 +42,9 @@ const Canvas = () => {
     const handleMouseDown = (event) => {
         if (isEditMode || displayIconModal) return;
         const { x, y } = drawElement(event);
-        setCurrentSquare({ x, y, width: 0, height: 0, tool: selectedTool });
+        setCurrentSquare({ x, y, width: 0, height: 0, tool: selectedTool,
+            ...(selectedTool === 'icon' ? { iconName: selectedIconName } : {})
+        });
     };
 
     const handleMouseMove = (event) => {

@@ -20,3 +20,7 @@
     border-color: var(--rect-border);
     z-index: 2;
 }
+
+.icon {
+    color: var(--rect-text);
+}
