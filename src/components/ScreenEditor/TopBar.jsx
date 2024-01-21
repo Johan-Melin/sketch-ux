@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
 import { TOOLS, ACTIONS } from '../../constants/tools';
-import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaFile, FaPlay, FaCamera, FaIcons } from 'react-icons/fa'; 
+import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaLink, FaFile, FaPlay, FaCamera, FaIcons } from 'react-icons/fa'; 
 import {ICONS} from '../../constants/icons';
 
 function TopBar({ onBackToProjects }) {
@@ -31,7 +31,12 @@ function TopBar({ onBackToProjects }) {
             <div className={styles.topBar}>
                 <div className={styles.row}>
                     <TopBarButton name="back" handleClick={onBackToProjects} Icon={FaArrowLeft} />
-                    {isEditMode ? (<TopBarButton name="delete" handleClick={() => []} Icon={FaTrash} />) 
+                    {isEditMode ? (
+                        <>
+                            <TopBarButton name="delete" handleClick={() => []} Icon={FaTrash} />
+                            <TopBarButton name="link" handleClick={() => []} Icon={FaLink} />
+                        </>
+                    ) 
                     : (
                     <>
                       {!isPlayMode && (

@@ -13,6 +13,12 @@ const Canvas = () => {
     const { addRect } = useRectActions();
     const { currentScreen } = useContext(ProjectsContext);
     const canCreate = !isEditMode && !isPlayMode && !displayIconModal;
+    const [selectedRect, setSelectedRect] = useState(null);
+
+    const handleRectClick = (rect) => {
+        if (!isEditMode) return;
+        setSelectedRect(rect);
+      };
 
     useEffect(() => {
         const updateGridSize = () => {
@@ -81,7 +87,7 @@ const Canvas = () => {
         >
             {displayIconModal && <Icons />}
             {currentScreen.rect.map((square, index) => (
-                <Square key={index} square={square} gridSize={gridSize} />
+                <Square key={index} square={square} gridSize={gridSize} onClick={() => handleRectClick(square)} isSelected={selectedRect && selectedRect.id === square.id} />
             ))}
             {currentSquare && ( <Square square={currentSquare} gridSize={gridSize} /> )}
         </div>

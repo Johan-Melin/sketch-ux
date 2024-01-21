@@ -26,6 +26,7 @@
   --rect-text: #555;
   --rect-image: #999;
   --rect-border: #333;
+  --rect-selected: #0056b3;
 }
 
 body {

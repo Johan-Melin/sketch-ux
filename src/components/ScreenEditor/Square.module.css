@@ -25,3 +25,8 @@
     color: var(--rect-text);
     z-index: 2;
 }
+
+.selected {
+    border: 3px solid var(--rect-selected);
+    box-sizing: border-box;
+}

@@ -17,6 +17,7 @@ export default function useRectActions() {
     };
     
     const addRect = (rect) => {
+        rect.id = crypto.randomUUID();
         modifyRect(prevRect => [...prevRect, rect]);
     };
 
