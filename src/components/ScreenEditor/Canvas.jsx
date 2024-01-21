@@ -12,6 +12,7 @@ const Canvas = () => {
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const { addRect } = useRectActions();
     const { currentScreen } = useContext(ProjectsContext);
+    const canCreate = !isEditMode && !isPlayMode && !displayIconModal;
 
     useEffect(() => {
         const updateGridSize = () => {
@@ -40,7 +41,7 @@ const Canvas = () => {
     }
 
     const handleMouseDown = (event) => {
-        if (isEditMode || displayIconModal) return;
+        if (!canCreate) return;
         const { x, y } = drawElement(event);
         setCurrentSquare({ x, y, width: 0, height: 0, tool: selectedTool,
             ...(selectedTool === 'icon' ? { iconName: selectedIconName } : {})
@@ -48,7 +49,7 @@ const Canvas = () => {
     };
 
     const handleMouseMove = (event) => {
-        if (isEditMode || displayIconModal) return;
+        if (!canCreate) return;
         if (currentSquare) {
             const { x, y } = drawElement(event);
             setCurrentSquare({
@@ -60,7 +61,7 @@ const Canvas = () => {
     };
 
     const handleMouseUp = () => {
-        if (isEditMode || displayIconModal) return;
+        if (!canCreate) return;
         if (currentSquare) {
             addRect(currentSquare);
             setCurrentSquare(null);

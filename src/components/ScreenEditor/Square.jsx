@@ -7,8 +7,9 @@ const Square = ({ square, gridSize }) => {
     const top = Math.min(square.y, square.y + square.height);
     const minWidth = 3;
     const minHeight = 3;
-    const width = Math.max(Math.abs(square.width * gridSize.x), minWidth);
-    const height = Math.max(Math.abs(square.height * gridSize.y), minHeight);
+    const vertical = Math.abs(square.width) > Math.abs(square.height);
+    const width = Math.max(Math.abs(square.width * gridSize.x), vertical ? gridSize.x : minWidth);
+    const height = Math.max(Math.abs(square.height * gridSize.y), vertical ? minHeight : gridSize.y);
     const Icon = ICONS[square.iconName];
 
     return (

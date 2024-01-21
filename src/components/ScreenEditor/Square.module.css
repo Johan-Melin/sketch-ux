@@ -23,4 +23,5 @@
 
 .icon {
     color: var(--rect-text);
+    z-index: 2;
 }
