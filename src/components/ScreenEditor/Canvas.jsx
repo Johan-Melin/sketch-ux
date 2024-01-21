@@ -18,7 +18,13 @@ const Canvas = () => {
     const handleRectClick = (rect) => {
         if (!isEditMode) return;
         setSelectedRect(rect);
-      };
+    };
+
+    useEffect(() => {
+        if (!isEditMode) {
+          setSelectedRect(null);
+        }
+      }, [isEditMode]);
 
     useEffect(() => {
         const updateGridSize = () => {
