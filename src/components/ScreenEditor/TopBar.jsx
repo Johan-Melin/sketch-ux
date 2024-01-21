@@ -38,35 +38,26 @@ function TopBar({ onBackToProjects }) {
         <div className={styles.topBar}>
             <div className={styles.row}>
                 <TopBarButton name="back" handleClick={onBackToProjects} Icon={FaArrowLeft} />
-                {mode === "edit" ? (
-                    selectedRect && <>
+                {mode === "edit" && selectedRect && (
+                    <>
                         <TopBarButton name="delete" handleClick={handleDeleteClick} Icon={FaTrash} />
                         <TopBarButton name="link" handleClick={() => []} Icon={FaLink} />
                     </>
-                ) 
-                : (
-                <>
-                    {mode !== "play" && (
+                )}
+                {mode === "create" && (
                     <>
                         <TopBarButton name="text" handleClick={() => setSelectedTool(TEXT)} Icon={FaFont} />
                         <TopBarButton name="image" handleClick={() => setSelectedTool(IMAGE)} Icon={FaSquare} />
                         <TopBarButton name="input" handleClick={() => setSelectedTool(INPUT)} Icon={FaRegSquare} />
                         <TopBarButton name="icon" handleClick={handleDisplayIconModalClick} Icon={SelectedIcon} />
                     </>
-                    )}
-                </>
-            )}
+                )}
             </div>
             <div className={styles.row}>
                 {mode === "edit" && <TopBarButton name="clear" handleClick={() => handleAction(CLEAR)} Icon={FaTimesCircle} />}
-                {mode === "play" ?
-                    <TopBarButton name="screenshot" handleClick={() => handleAction(SCREENSHOT)} Icon={FaCamera} />
-                    : (
-                    <>              
-                        <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} Icon={FaUndo} />
-                        <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaEdit} isToggled={mode === "edit"} />
-                    </>
-                )}
+                {mode === "play" && <TopBarButton name="screenshot" handleClick={() => handleAction(SCREENSHOT)} Icon={FaCamera} />}
+                {mode === "create" && <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} Icon={FaUndo} />}
+                <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaEdit} isToggled={mode === "edit"} />
                 <TopBarButton name="edit" handleClick={handlePlayClick} Icon={FaPlay} isToggled={mode === "play"} />
             </div>
         </div>
