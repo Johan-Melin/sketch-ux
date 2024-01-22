@@ -5,6 +5,7 @@ import styles from './Canvas.module.css';
 import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
 import Icons from './Icons';
+import LinkList from './LinkList';
 
 const Canvas = () => {
     const { selectedTool, mode, canvasRef, displayModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);   
@@ -85,6 +86,7 @@ const Canvas = () => {
             className={`${styles.canvas} ${mode === "play" ? '' : styles.grid}`}
         >
             {displayModal === "icon" && <Icons />}
+            {displayModal === "link" && <LinkList />}
             {currentScreen.rect.map((square, index) => (
                 <Square key={index} square={square} gridSize={gridSize} onClick={() => handleRectClick(square)} isSelected={selectedRect && selectedRect.id === square.id} />
             ))}

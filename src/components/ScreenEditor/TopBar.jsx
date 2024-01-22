@@ -29,6 +29,10 @@ function TopBar({ onBackToProjects }) {
         setDisplayModal(prev => prev === 'icon' ? null : 'icon');
     };
 
+    const handleDisplayLinkModalClick = () => {
+        setDisplayModal(prev => prev === 'link' ? null : 'link');
+    };
+
     const handleDeleteClick = () => {
         deleteRect(selectedRect.id);
         setSelectedRect(null);
@@ -41,7 +45,7 @@ function TopBar({ onBackToProjects }) {
                 {mode === "edit" && selectedRect && (
                     <>
                         <TopBarButton name="delete" handleClick={handleDeleteClick} Icon={FaTrash} />
-                        <TopBarButton name="link" handleClick={() => {}} Icon={FaLink} />
+                        <TopBarButton name="link" handleClick={handleDisplayLinkModalClick} Icon={FaLink} />
                     </>
                 )}
                 {mode === "create" && (
