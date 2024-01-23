@@ -76,7 +76,7 @@ export default function useScreenActions() {
                 project.id === currentProjectId ? {
                     ...project,
                     screens: project.screens.map(screen =>
-                        screen.id === screenId ? {
+                        screen.id === currentScreenId ? {
                             ...screen,
                             rect: screen.rect.map(rect =>
                                 rect.id === rectId ? { ...rect, link: screenId } : rect

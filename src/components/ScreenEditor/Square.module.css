@@ -26,7 +26,16 @@
     z-index: 2;
 }
 
-.selected {
+.selected.selected  {
     border: 3px solid var(--rect-selected);
     box-sizing: border-box;
+}
+
+.link {
+    border: 3px solid var(--rect-link);
+    box-sizing: border-box;
+}
+
+.link:hover {
+    cursor: pointer;
 }

@@ -21,22 +21,27 @@ function LinkList() {
     }
 
     const handleAddLink = (screenId) => {
-        const rectId = selectedRect.id;
-        addLink(screenId, rectId);
+        if (!selectedRect) return;
+        addLink(screenId, selectedRect.id);
     }
 
-  return (
-    <div className={styles.container}>
-        <p>Link to:</p>
-        <div className={styles.row}>
-            <div className={styles.item} onClick={handleAddScreen}>New Screen</div>
-            <div className={styles.item} onClick={handleCopyScreen}>Copy of current screen</div>
+    return (
+        <div className={styles.container}>
+            <p>Link to: {selectedRect?.link}</p>
+            <div className={styles.row}>
+                <div className={styles.item} onClick={handleAddScreen}>New Screen</div>
+                <div className={styles.item} onClick={handleCopyScreen}>Copy of current screen</div>
+            </div>
+            {currentProject.screens.map((screen) => {
+                const isSelected = selectedRect && screen.id === selectedRect?.link;
+                return (
+                    <div key={screen.id} className={`${styles.item} ${isSelected ? styles.selected : ''}`} onClick={() => handleAddLink(screen.id)}>
+                        {screen.name}
+                    </div>
+                )}
+            )}
         </div>
-        {currentProject.screens.map((screen) => (
-            <div key={screen.id} className={styles.item} onClick={() => handleAddLink(screen.id)}>{screen.name}</div>
-        ))}
-    </div>
-  )
+    )
 }
 
 export default LinkList
