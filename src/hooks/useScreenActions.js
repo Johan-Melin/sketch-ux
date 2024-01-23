@@ -12,10 +12,11 @@ export default function useScreenActions() {
             ? { ...project, screens: [{ id: uuid, name: screenName, rect: [] }, ...project.screens] }
             : project
         ));
+        return uuid;
     };
 
     const editScreen = (screenId, event) => {
-        event.stopPropagation();
+        event && event.stopPropagation();
         const newName = prompt('Enter new screen name');
         if (newName !== null && newName !== '') {
             setProjects(prevProjects =>
@@ -57,21 +58,41 @@ export default function useScreenActions() {
                 const currentScreen = project.screens.find(screen => screen.id === currentScreenId);
                 return { 
                     ...project, 
-                    screens: [...project.screens, 
-                              {...currentScreen, 
+                    screens: [{...currentScreen, 
                                id: uuid,
-                               name: checkName(currentScreen.name, project)}] 
+                               name: checkName(currentScreen.name, project)},
+                               ...project.screens] 
                 };
             } else {
                 return project;
             }
         }));
+        return uuid;
     };
+
+    const addLink = (screenId, rectId) => {
+        setProjects(prevProjects =>
+            prevProjects.map(project =>
+                project.id === currentProjectId ? {
+                    ...project,
+                    screens: project.screens.map(screen =>
+                        screen.id === screenId ? {
+                            ...screen,
+                            rect: screen.rect.map(rect =>
+                                rect.id === rectId ? { ...rect, link: screenId } : rect
+                            )
+                        } : screen
+                    )
+                } : project
+            )
+        );
+    }
 
     return {
         addScreen,
         editScreen,
         deleteScreen,
         copyScreen,
+        addLink,
     };
 }
