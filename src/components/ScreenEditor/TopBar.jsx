@@ -24,7 +24,7 @@ function TopBar({ onBackToProjects }) {
         setMode(prev => prev === 'play' ? 'create' : 'play');
     };
 
-    const handleDisplayIconModalClick = () => {
+    const handleDisplayIconModal = () => {
         setSelectedTool(ICON);
         setDisplayModal(prev => prev === 'icon' ? null : 'icon');
     };
@@ -53,7 +53,7 @@ function TopBar({ onBackToProjects }) {
                         <TopBarButton name="text" handleClick={() => setSelectedTool(TEXT)} Icon={FaFont} />
                         <TopBarButton name="image" handleClick={() => setSelectedTool(IMAGE)} Icon={FaSquare} />
                         <TopBarButton name="input" handleClick={() => setSelectedTool(INPUT)} Icon={FaRegSquare} />
-                        <TopBarButton name="icon" handleClick={handleDisplayIconModalClick} Icon={SelectedIcon} />
+                        <TopBarButton name="icon" handleClick={handleDisplayIconModal} Icon={SelectedIcon} />
                     </>
                 )}
             </div>

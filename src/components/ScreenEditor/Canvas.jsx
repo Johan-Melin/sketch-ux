@@ -6,7 +6,6 @@ import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
 import Icons from './Icons';
 import LinkList from './LinkList';
-import useProjects from '../../hooks/useProjects';
 
 const Canvas = () => {
     const { selectedTool, mode, canvasRef, displayModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);   
@@ -15,7 +14,7 @@ const Canvas = () => {
     const { addRect } = useRectActions();
     const { currentScreen } = useContext(ProjectsContext);
     const canCreate = mode === "create" && !displayModal;
-    const {setCurrentScreenId} = useProjects();
+    const {setCurrentScreenId} = useContext(ProjectsContext);
 
     const handleRectClick = (rect) => {
         if (mode === "edit") {

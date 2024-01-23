@@ -8,7 +8,7 @@ function LinkList() {
     const { projects, currentProjectId } = useContext(ProjectsContext);
     const currentProject = projects.find(project => project.id === currentProjectId);    
     const { addScreen, copyScreen, editScreen, addLink } = useScreenActions();
-    const { selectedRect } = useContext(TopBarContext);   
+    const { selectedRect, setSelectedRect } = useContext(TopBarContext);   
 
     const handleAddScreen = () => {
         const id = addScreen();
@@ -22,12 +22,13 @@ function LinkList() {
 
     const handleAddLink = (screenId) => {
         if (!selectedRect) return;
+        setSelectedRect(prevRect => ({...prevRect, link: screenId}));
         addLink(screenId, selectedRect.id);
     }
 
     return (
         <div className={styles.container}>
-            <p>Link to: {selectedRect?.link}</p>
+            <p>Link to:</p>
             <div className={styles.row}>
                 <div className={styles.item} onClick={handleAddScreen}>New Screen</div>
                 <div className={styles.item} onClick={handleCopyScreen}>Copy of current screen</div>
@@ -36,7 +37,7 @@ function LinkList() {
                 const isSelected = selectedRect && screen.id === selectedRect?.link;
                 return (
                     <div key={screen.id} className={`${styles.item} ${isSelected ? styles.selected : ''}`} onClick={() => handleAddLink(screen.id)}>
-                        {screen.name}
+                        {screen.name}  {isSelected && '✓'}
                     </div>
                 )}
             )}
