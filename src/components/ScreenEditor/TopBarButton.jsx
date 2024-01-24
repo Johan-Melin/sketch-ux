@@ -10,7 +10,10 @@ function TopBarButton({ name, handleClick, Icon, isToggled  }) {
     const buttonClassName = `${styles.topBarButton} ${active ? styles.active : ''}`;
     
     return (
-        <div className={buttonClassName} onClick={handleClick}>{Icon && <Icon /> || name}</div>
+        <div className={buttonClassName} onClick={handleClick}>
+            <div className={styles.topBarIcon}>{Icon && <Icon />}</div>
+            <div className={styles.topBarText}>{name}</div>
+        </div>
     )
 }
 
