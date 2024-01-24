@@ -2,4 +2,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(0deg, #ccc 0%, #eee 100%);
   }
