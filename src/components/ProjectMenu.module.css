@@ -7,12 +7,23 @@
 .project {
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
-    border: 1px solid var(--project-border);
+    border-bottom: 1px solid var(--project-border);
     margin-bottom: 10px;
+}
+  
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 .icon {
     margin-left: 10px;
+}
+
+.subText {
+    font-size: 0.8rem;
+    color: var(--gray);
 }
