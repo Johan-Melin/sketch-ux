@@ -23,8 +23,13 @@ function LinkList() {
 
     const handleAddLink = (screenId) => {
         if (!selectedRect) return;
-        setSelectedRect(prevRect => ({...prevRect, link: screenId}));
-        addLink(screenId, selectedRect.id);
+        if (selectedRect?.link === screenId) {
+            setSelectedRect(prevRect => ({...prevRect, link: null}));
+            addLink(null, selectedRect.id);
+        } else {
+            setSelectedRect(prevRect => ({...prevRect, link: screenId}));
+            addLink(screenId, selectedRect.id);
+        }
     }
 
     const handleGoToScreen = () => {
