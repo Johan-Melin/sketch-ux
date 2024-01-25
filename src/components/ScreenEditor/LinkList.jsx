@@ -2,13 +2,15 @@ import styles from './LinkList.module.css';
 import { ProjectsContext } from "../../context/ProjectsContext";
 import { useContext } from 'react';
 import useScreenActions from '../../hooks/useScreenActions';
+import useRectActions from '../../hooks/useRectActions';
 import TopBarContext from '../../context/TopBarContext';
 import { FaArrowRight } from 'react-icons/fa';
 
 function LinkList() {
     const { projects, currentProjectId, currentScreenId, setCurrentScreenId } = useContext(ProjectsContext);
     const currentProject = projects.find(project => project.id === currentProjectId);    
-    const { addScreen, copyScreen, editScreen, addLink } = useScreenActions();
+    const { addScreen, copyScreen, editScreen } = useScreenActions();
+    const { addLink } = useRectActions();
     const { selectedRect, setSelectedRect, setDisplayModal } = useContext(TopBarContext);   
 
     const handleAddScreen = () => {

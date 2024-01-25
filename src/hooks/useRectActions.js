@@ -33,10 +33,28 @@ export default function useRectActions() {
         modifyRect(prevRect => prevRect.filter(rect => rect.id !== id));
     };
 
+    const addValueToRect = (id, value) => {
+        modifyRect(prevRect => prevRect.map(rect => 
+            rect.id === id 
+                ? { ...rect, ...value } 
+                : rect
+        ));
+    };
+    
+    const addLink = (screenId, rectId) => {
+        addValueToRect(rectId, {link: screenId});
+    }
+
+    const changeColor = (color, rectId) => {
+        addValueToRect(rectId, {color: color});
+    }
+
     return { 
         addRect,
         clearRect, 
         undoRect,
         deleteRect,
+        addLink,
+        changeColor,
     };
 }

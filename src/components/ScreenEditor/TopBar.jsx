@@ -7,15 +7,13 @@ import { TOOLS, ACTIONS } from '../../constants/tools';
 import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaLink, FaTimesCircle, FaPlay, FaCamera, FaIcons } from 'react-icons/fa'; 
 import {ICONS} from '../../constants/icons';
 import useRectActions from '../../hooks/useRectActions';
-import useScreenActions from '../../hooks/useScreenActions';
 import { IoColorPalette } from "react-icons/io5";
 
 function TopBar({ onBackToProjects }) {
     const { setSelectedTool, handleAction, mode, setMode, setDisplayModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT, ICON } = TOOLS;
     const { UNDO, CLEAR, SCREENSHOT } = ACTIONS;
-    const { deleteRect } = useRectActions();
-    const { changeColor } = useScreenActions();
+    const { deleteRect, changeColor } = useRectActions();
     const SelectedIcon = ICONS[selectedIconName] || FaIcons;
     const [color, setColor] = useState("#ffffff");
     const inputRef = useRef();
