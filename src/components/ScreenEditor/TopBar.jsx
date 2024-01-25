@@ -1,21 +1,23 @@
 import PropTypes from 'prop-types';
 import TopBarContext from '../../context/TopBarContext';
-import { useContext } from 'react';
+import { useContext, useState, useRef } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
 import { TOOLS, ACTIONS } from '../../constants/tools';
 import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaLink, FaTimesCircle, FaPlay, FaCamera, FaIcons } from 'react-icons/fa'; 
 import {ICONS} from '../../constants/icons';
 import useRectActions from '../../hooks/useRectActions';
+import { IoColorPalette } from "react-icons/io5";
 
 function TopBar({ onBackToProjects }) {
     const { setSelectedTool, handleAction, mode, setMode, setDisplayModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);
     const { TEXT, IMAGE, INPUT, ICON } = TOOLS;
     const { UNDO, CLEAR, SCREENSHOT } = ACTIONS;
     const { deleteRect } = useRectActions();
-
     const SelectedIcon = ICONS[selectedIconName] || FaIcons;
-    
+    const [color, setColor] = useState("#ffffff");
+    const inputRef = useRef();
+
     const handleEditClick = () => {
         setMode(prev => prev === 'edit' ? 'create' : 'edit');
     };
@@ -40,12 +42,14 @@ function TopBar({ onBackToProjects }) {
 
     return (
         <div className={styles.topBar}>
+            <input type="color" ref={inputRef} style={{ display: 'none' }} value={color} onChange={(event) => setColor(event.target.value)} />
             <div className={styles.row}>
                 <TopBarButton name="back" handleClick={onBackToProjects} Icon={FaArrowLeft} />
                 {mode === "edit" && selectedRect && (
                     <>
                         <TopBarButton name="delete" handleClick={handleDeleteClick} Icon={FaTrash} />
                         <TopBarButton name="link" handleClick={handleDisplayLinkModalClick} Icon={FaLink} />
+                        <TopBarButton name="color" handleClick={() => inputRef.current.click()} Icon={IoColorPalette} />
                     </>
                 )}
                 {mode === "create" && (
