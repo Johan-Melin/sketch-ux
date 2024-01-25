@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import TopBarContext from '../../context/TopBarContext';
-import { useContext, useState, useRef } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
 import { TOOLS, ACTIONS } from '../../constants/tools';
 import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaLink, FaTimesCircle, FaPlay, FaCamera, FaIcons } from 'react-icons/fa'; 
 import {ICONS} from '../../constants/icons';
 import useRectActions from '../../hooks/useRectActions';
+import useScreenActions from '../../hooks/useScreenActions';
 import { IoColorPalette } from "react-icons/io5";
 
 function TopBar({ onBackToProjects }) {
@@ -14,9 +15,17 @@ function TopBar({ onBackToProjects }) {
     const { TEXT, IMAGE, INPUT, ICON } = TOOLS;
     const { UNDO, CLEAR, SCREENSHOT } = ACTIONS;
     const { deleteRect } = useRectActions();
+    const { changeColor } = useScreenActions();
     const SelectedIcon = ICONS[selectedIconName] || FaIcons;
     const [color, setColor] = useState("#ffffff");
     const inputRef = useRef();
+
+    useEffect(() => {
+        if (selectedRect) {
+            changeColor(color, selectedRect.id);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [color]);
 
     const handleEditClick = () => {
         setMode(prev => prev === 'edit' ? 'create' : 'edit');

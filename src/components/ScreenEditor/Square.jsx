@@ -25,6 +25,7 @@ const Square = ({ square, gridSize, onClick, isSelected }) => {
                 style={{
                     left: left * gridSize.x,
                     top: top * gridSize.y,
+                    color: square.color,
                 }}
                 onClick={onClick}
             />
@@ -35,6 +36,7 @@ const Square = ({ square, gridSize, onClick, isSelected }) => {
                     top: top * gridSize.y,
                     width: `${width}px`,
                     height: `${height}px`,
+                    backgroundColor: square.color,
                 }}
                 onClick={onClick}
             />
@@ -52,6 +54,7 @@ Square.propTypes = {
         tool: PropTypes.string.isRequired,
         iconName: PropTypes.string,
         link: PropTypes.string,
+        color: PropTypes.string,
     }).isRequired,
     gridSize: PropTypes.shape({
         x: PropTypes.number.isRequired,

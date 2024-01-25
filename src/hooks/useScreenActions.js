@@ -88,11 +88,30 @@ export default function useScreenActions() {
         );
     }
 
+    const changeColor = (color, rectId) => {
+        setProjects(prevProjects =>
+            prevProjects.map(project =>
+                project.id === currentProjectId ? {
+                    ...project,
+                    screens: project.screens.map(screen =>
+                        screen.id === currentScreenId ? {
+                            ...screen,
+                            rect: screen.rect.map(rect =>
+                                rect.id === rectId ? { ...rect, color: color } : rect
+                            )
+                        } : screen
+                    )
+                } : project
+            )
+        );
+    }
+
     return {
         addScreen,
         editScreen,
         deleteScreen,
         copyScreen,
         addLink,
+        changeColor,
     };
 }
