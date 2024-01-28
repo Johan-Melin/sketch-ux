@@ -2,7 +2,6 @@ import TopBar from './ScreenEditor/TopBar';
 import Canvas from './ScreenEditor/Canvas';
 import TopBarContext from '../context/TopBarContext';
 import { useEffect, useState } from 'react';
-import styles from './ScreenEditor.module.css';
 import { useContext, useRef } from "react";
 import { ProjectsContext } from "../context/ProjectsContext";
 import useRectActions from "../hooks/useRectActions";
@@ -53,9 +52,7 @@ const ScreenEditor = () => {
         <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, mode, setMode, canvasRef, displayModal, setDisplayModal, selectedIconName, setSelectedIconName, selectedRect, setSelectedRect }}>
             <div>
                 <TopBar onBackToProjects={() => setCurrentScreenId(null)} />
-                <div className={styles.container} >
-                    <Canvas />
-                </div>
+                <Canvas />
             </div>
         </TopBarContext.Provider>
     );

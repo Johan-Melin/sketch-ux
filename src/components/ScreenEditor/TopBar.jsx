@@ -73,7 +73,7 @@ function TopBar({ onBackToProjects }) {
                 {mode === "play" && <TopBarButton name="screenshot" handleClick={() => handleAction(SCREENSHOT)} Icon={FaCamera} />}
                 {mode === "create" && <TopBarButton name="undo" handleClick={() => handleAction(UNDO)} Icon={FaUndo} />}
                 <TopBarButton name="edit" handleClick={handleEditClick} Icon={FaEdit} isToggled={mode === "edit"} />
-                <TopBarButton name="edit" handleClick={handlePlayClick} Icon={FaPlay} isToggled={mode === "play"} />
+                <TopBarButton name="play" handleClick={handlePlayClick} Icon={FaPlay} isToggled={mode === "play"} />
             </div>
         </div>
     );

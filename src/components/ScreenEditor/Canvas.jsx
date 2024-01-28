@@ -80,22 +80,24 @@ const Canvas = () => {
     };
 
     return (
-        <div
-            ref={canvasRef}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onTouchStart={handleMouseDown} 
-            onTouchMove={handleMouseMove} 
-            onTouchEnd={handleMouseUp}
-            className={`${styles.canvas} ${mode === "play" ? '' : styles.grid}`}
-        >
-            {displayModal === "icon" && <Icons />}
-            {displayModal === "link" && <LinkList />}
-            {currentScreen.rect.map((square, index) => (
-                <Square key={index} square={square} gridSize={gridSize} onClick={() => handleRectClick(square)} isSelected={selectedRect && selectedRect.id === square.id} />
-            ))}
-            {currentSquare && ( <Square square={currentSquare} gridSize={gridSize} /> )}
+        <div className={styles.container}>
+            <div
+                ref={canvasRef}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onTouchStart={handleMouseDown} 
+                onTouchMove={handleMouseMove} 
+                onTouchEnd={handleMouseUp}
+                className={`${styles.canvas} ${mode === "play" ? '' : styles.grid}`}
+            >
+                {displayModal === "icon" && <Icons />}
+                {displayModal === "link" && <LinkList />}
+                {currentScreen.rect.map((square, index) => (
+                    <Square key={index} square={square} gridSize={gridSize} onClick={() => handleRectClick(square)} isSelected={selectedRect && selectedRect.id === square.id} />
+                ))}
+                {currentSquare && ( <Square square={currentSquare} gridSize={gridSize} /> )}
+            </div>
         </div>
     );
 };
