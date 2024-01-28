@@ -3,15 +3,20 @@ import { ProjectsContext } from "../context/ProjectsContext";
 
 export default function useScreenActions() {
     const { projects, setProjects, currentProjectId, currentScreenId } = useContext(ProjectsContext);
+
+    const modifyScreen = (callback) => {
+        setProjects(prevProjects => prevProjects.map(project =>
+            project.id === currentProjectId
+                ? { ...project, screens: callback(project.screens) }
+                : project
+        ));
+    };
+
     const addScreen = () => {
         const currentProject = projects.find(project => project.id === currentProjectId);
         const screenName = "Screen " + (currentProject.screens.length + 1);
         const uuid = crypto.randomUUID();
-        setProjects(prevProjects => prevProjects.map(project =>
-        project.id === currentProjectId
-            ? { ...project, screens: [{ id: uuid, name: screenName, rect: [] }, ...project.screens] }
-            : project
-        ));
+        modifyScreen(screens => [{ id: uuid, name: screenName, rect: [] }, ...screens]);
         return uuid;
     };
 
@@ -19,25 +24,15 @@ export default function useScreenActions() {
         event && event.stopPropagation();
         const newName = prompt('Enter new screen name');
         if (newName !== null && newName !== '') {
-            setProjects(prevProjects =>
-                prevProjects.map(project =>
-                    project.id === currentProjectId ? {
-                    ...project,
-                    screens: project.screens.map(screen =>
-                        screen.id === screenId ? { ...screen, name: newName } : screen
-                    )} : project
-                )
-            );
+            modifyScreen(screens => screens.map(screen =>
+                screen.id === screenId ? { ...screen, name: newName } : screen
+            ));
         }
     };
 
     const deleteScreen = (id, event) => {
         event.stopPropagation();
-        setProjects(projects => projects.map(project =>
-            project.id === currentProjectId
-            ? { ...project, screens: project.screens.filter(screen => screen.id !== id) }
-            : project
-        ));
+        modifyScreen(screens => screens.filter(screen => screen.id !== id));
     };
 
     const checkName = (name, project) => {
@@ -53,20 +48,11 @@ export default function useScreenActions() {
 
     const copyScreen = () => {
         const uuid = crypto.randomUUID();
-        setProjects(projects => projects.map(project => {
-            if (project.id === currentProjectId) {
-                const currentScreen = project.screens.find(screen => screen.id === currentScreenId);
-                return { 
-                    ...project, 
-                    screens: [{...currentScreen, 
-                               id: uuid,
-                               name: checkName(currentScreen.name, project)},
-                               ...project.screens] 
-                };
-            } else {
-                return project;
-            }
-        }));
+        const currentProject = projects.find(project => project.id === currentProjectId);
+        modifyScreen(screens => {
+            const currentScreen = screens.find(screen => screen.id === currentScreenId);
+            return [{...currentScreen, id: uuid, name: checkName(currentScreen.name, currentProject)}, ...screens];
+        });
         return uuid;
     };
 
