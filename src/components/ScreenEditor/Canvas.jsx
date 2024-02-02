@@ -14,6 +14,7 @@ const Canvas = () => {
     const { addRect } = useRectActions();
     const canCreate = mode === "create" && !displayModal;
     const {currentProject, currentScreen, setCurrentScreenId} = useContext(ProjectsContext);
+    const isCreateMode = mode === "create";
 
     const handleRectClick = (rect) => {
         if (mode === "edit") {
@@ -90,7 +91,11 @@ const Canvas = () => {
                 onTouchStart={handleMouseDown} 
                 onTouchMove={handleMouseMove} 
                 onTouchEnd={handleMouseUp}
-                className={`${styles.canvas} ${mode === "play" ? '' : styles.grid}`}
+                className={`
+                    ${styles.canvas} 
+                    ${mode === "play" ? '' : styles.grid}
+                    ${isCreateMode ? styles['cursor-crosshair'] : ''}
+                `}
             >
                 {displayModal === "icon" && <Icons />}
                 {displayModal === "link" && <LinkList />}

@@ -14,6 +14,10 @@
     box-shadow: 0 0 15px gray;
 }
 
+.canvas.cursor-crosshair {
+    cursor: crosshair;
+}
+
 .grid {
     z-index: 1;
     background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(to right, var(--grid-color) 1px, var(--canvas-bg) 1px);
