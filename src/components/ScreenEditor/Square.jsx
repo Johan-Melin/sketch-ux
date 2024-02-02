@@ -16,11 +16,13 @@ const Square = ({ square, gridSize, onClick, isSelected }) => {
     const { mode } = useContext(TopBarContext);   
     const isPlayMode = mode === "play";
 
+    const classNames = `${styles.rect} ${styles[square.tool]} ${(square.link && !isPlayMode) ? styles.link : ''} ${isSelected ? styles.selected : ''}`
+
     return (
         <>
-            {square.tool === 'icon' 
-            ? <Icon 
-                className={`${styles.rect} ${styles[square.tool]} ${(square.link && !isPlayMode) ? styles.link : ''} ${isSelected ? styles.selected : ''}`}
+            {square.tool === 'icon' &&
+            <Icon 
+                className={classNames}
                 size={Math.max(width, height)}
                 style={{
                     left: left * gridSize.x,
@@ -28,9 +30,10 @@ const Square = ({ square, gridSize, onClick, isSelected }) => {
                     color: square.color,
                 }}
                 onClick={onClick}
-            />
-            : <div
-            className={`${styles.rect} ${styles[square.tool]} ${(square.link && !isPlayMode) ? styles.link : ''} ${isSelected ? styles.selected : ''}`}
+            />}
+            {square.tool === 'image' && 
+            <div
+                className={classNames}
                 style={{
                     left: left * gridSize.x,
                     top: top * gridSize.y,

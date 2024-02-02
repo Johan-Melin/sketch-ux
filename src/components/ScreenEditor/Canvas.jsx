@@ -12,16 +12,17 @@ const Canvas = () => {
     const [currentSquare, setCurrentSquare] = useState(null);
     const [gridSize, setGridSize] = useState({x: 20, y: 40});
     const { addRect } = useRectActions();
-    const { currentScreen } = useContext(ProjectsContext);
     const canCreate = mode === "create" && !displayModal;
-    const {setCurrentScreenId} = useContext(ProjectsContext);
+    const {currentProject, currentScreen, setCurrentScreenId} = useContext(ProjectsContext);
 
     const handleRectClick = (rect) => {
         if (mode === "edit") {
             setSelectedRect(rect);
         }
         if (mode === "play" && rect.link) {
-            setCurrentScreenId(rect.link);
+            if(currentProject.screens.some(screen => screen.id === rect.link)){
+                setCurrentScreenId(rect.link);
+            }
         }
     };
 

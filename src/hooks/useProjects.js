@@ -21,6 +21,7 @@ export default function useProjects() {
         setCurrentProjectId,
         currentScreenId,
         setCurrentScreenId,
+        currentProject,
         currentScreen,
     };
 }

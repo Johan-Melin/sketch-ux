@@ -23,8 +23,8 @@ const ScreenEditor = () => {
         }
         if (mode !== "create") {
             setDisplayModal(null);
-          }
-        }, [mode]);
+        }
+    }, [mode]);
 
     const handleScreenshot = () => {
         const canvasElement = canvasRef.current;
