@@ -15,8 +15,14 @@ const Square = ({ square, gridSize, onClick, isSelected }) => {
     const Icon = ICONS[square.iconName];
     const { mode } = useContext(TopBarContext);   
     const isPlayMode = mode === "play";
+    const isEditMode = mode === "edit";
 
-    const classNames = `${styles.rect} ${styles[square.tool]} ${(square.link && !isPlayMode) ? styles.link : ''} ${isSelected ? styles.selected : ''}`
+    const classNames = `
+        ${styles.rect} ${styles[square.tool]} 
+        ${(square.link && !isPlayMode) ? styles.link : ''} 
+        ${(isEditMode) ? styles.hoverable : ''} 
+        ${isSelected ? styles.selected : ''}
+    `
 
     return (
         <>
