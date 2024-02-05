@@ -37,7 +37,7 @@ const Square = ({ square, gridSize, onClick, isSelected }) => {
                 }}
                 onClick={onClick}
             />}
-            {square.tool === 'image' && 
+            {(square.tool === 'image' || square.tool === 'input' || square.tool === 'text') && 
             <div
                 className={classNames}
                 style={{
