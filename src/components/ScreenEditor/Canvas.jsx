@@ -5,6 +5,7 @@ import styles from './Canvas.module.css';
 import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
 import Icons from './Icons';
+import Text from './components/Text';
 import LinkList from './LinkList';
 
 const Canvas = () => {
@@ -100,6 +101,7 @@ const Canvas = () => {
                 {displayModal === "icon" && <Icons />}
                 {displayModal === "link" && <LinkList />}
                 {currentScreen.rect.map((square, index) => (
+                    square.tool === 'text' ? <Text key={index} square={square} gridSize={gridSize} /> :
                     <Square key={index} square={square} gridSize={gridSize} onClick={() => handleRectClick(square)} isSelected={selectedRect && selectedRect.id === square.id} />
                 ))}
                 {currentSquare && ( <Square square={currentSquare} gridSize={gridSize} /> )}
