@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import TopBarContext from '../../context/TopBarContext';
+import TopBarContext from '../../../context/TopBarContext';
 import { useContext, useState, useRef, useEffect } from 'react';
 import styles from './TopBar.module.css';
 import TopBarButton from './TopBarButton';
-import { TOOLS, ACTIONS } from '../../constants/tools';
+import { TOOLS, ACTIONS } from '../../../constants/tools';
 import { FaArrowLeft, FaFont, FaSquare, FaRegSquare, FaUndo, FaEdit, FaTrash, FaLink, FaTimesCircle, FaPlay, FaCamera, FaIcons } from 'react-icons/fa'; 
-import {ICONS} from '../../constants/icons';
-import useRectActions from '../../hooks/useRectActions';
+import {ICONS} from '../../../constants/icons';
+import useRectActions from '../../../hooks/useRectActions';
 import { IoColorPalette } from "react-icons/io5";
 
 function TopBar({ onBackToProjects }) {

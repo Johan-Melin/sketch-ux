@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './TopBarButton.module.css';
-import TopBarContext from '../../context/TopBarContext';
+import TopBarContext from '../../../context/TopBarContext';
 import { useContext } from 'react';
 
 function TopBarButton({ name, handleClick, Icon, isToggled  }) {

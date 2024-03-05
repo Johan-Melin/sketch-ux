@@ -1,12 +1,12 @@
 import { useState, useContext, useEffect } from 'react';
-import Square from './Square';
+import Square from './elements/Square';
 import TopBarContext from '../../context/TopBarContext';
 import styles from './Canvas.module.css';
 import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
-import Icons from './Icons';
-import Text from './components/Text';
-import LinkList from './LinkList';
+import Icons from './topbar/Icons';
+import Text from './elements/Text';
+import LinkList from './topbar/LinkList';
 
 const Canvas = () => {
     const { selectedTool, mode, canvasRef, displayModal, selectedIconName, selectedRect, setSelectedRect } = useContext(TopBarContext);   

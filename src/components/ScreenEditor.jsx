@@ -1,4 +1,4 @@
-import TopBar from './ScreenEditor/TopBar';
+import TopBar from './ScreenEditor/topbar/TopBar';
 import Canvas from './ScreenEditor/Canvas';
 import TopBarContext from '../context/TopBarContext';
 import { useEffect, useState } from 'react';

@@ -1,7 +1,7 @@
-import {ICONS} from '../../constants/icons';
+import {ICONS} from '../../../constants/icons';
 import styles from './Icons.module.css';
 import PropTypes from 'prop-types';
-import TopBarContext from '../../context/TopBarContext';
+import TopBarContext from '../../../context/TopBarContext';
 import { useContext } from 'react';
 
 function Icons() {

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './Square.module.css';
-import { ICONS } from '../../constants/icons';
-import TopBarContext from '../../context/TopBarContext';
+import { ICONS } from '../../../constants/icons';
+import TopBarContext from '../../../context/TopBarContext';
 import { useContext } from 'react';
 
 const Square = ({ square, gridSize, onClick, isSelected }) => {

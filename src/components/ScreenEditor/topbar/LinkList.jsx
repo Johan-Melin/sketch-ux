@@ -1,9 +1,9 @@
 import styles from './LinkList.module.css';
-import { ProjectsContext } from "../../context/ProjectsContext";
+import { ProjectsContext } from "../../../context/ProjectsContext";
 import { useContext } from 'react';
-import useScreenActions from '../../hooks/useScreenActions';
-import useRectActions from '../../hooks/useRectActions';
-import TopBarContext from '../../context/TopBarContext';
+import useScreenActions from '../../../hooks/useScreenActions';
+import useRectActions from '../../../hooks/useRectActions';
+import TopBarContext from '../../../context/TopBarContext';
 import { FaArrowRight } from 'react-icons/fa';
 
 function LinkList() {
