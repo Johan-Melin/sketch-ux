@@ -1,8 +1,7 @@
 import TopBar from './ScreenEditor/topbar/TopBar';
 import Canvas from './ScreenEditor/Canvas';
 import TopBarContext from '../context/TopBarContext';
-import { useEffect, useState } from 'react';
-import { useContext, useRef } from "react";
+import { useEffect, useState, useContext, useRef } from 'react';
 import { ProjectsContext } from "../context/ProjectsContext";
 import useRectActions from "../hooks/useRectActions";
 import html2canvas from 'html2canvas';
@@ -48,8 +47,23 @@ const ScreenEditor = () => {
         }
     };
 
+    const topBarData = {
+        selectedTool,
+        setSelectedTool,
+        handleAction,
+        mode,
+        setMode,
+        canvasRef,
+        displayModal,
+        setDisplayModal,
+        selectedIconName,
+        setSelectedIconName,
+        selectedRect,
+        setSelectedRect
+    };
+
     return (
-        <TopBarContext.Provider value={{ selectedTool, setSelectedTool, handleAction, mode, setMode, canvasRef, displayModal, setDisplayModal, selectedIconName, setSelectedIconName, selectedRect, setSelectedRect }}>
+        <TopBarContext.Provider value={ topBarData }>
             <div>
                 <TopBar onBackToProjects={() => setCurrentScreenId(null)} />
                 <Canvas />

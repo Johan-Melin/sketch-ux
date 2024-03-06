@@ -1,7 +1,26 @@
-const TextInput = () => {
+import PropTypes from 'prop-types';
+
+const TextInput = ({square, gridSize}) => {
   return (
-    <input />
+    <input style={{
+        position: "absolute",
+        left: square.x * gridSize.x,
+        top: square.y * gridSize.y,
+        width: "100px",
+        height: "20px",
+    }}/>
   )
 }
+
+TextInput.propTypes = {
+    square: PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired, 
+    }).isRequired,
+    gridSize: PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired
+    }),
+};
 
 export default TextInput

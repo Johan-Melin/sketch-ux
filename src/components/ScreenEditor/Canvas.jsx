@@ -1,11 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
-import Square from './elements/Square';
+import { Square, Text, TextInput } from './elements';
 import TopBarContext from '../../context/TopBarContext';
 import styles from './Canvas.module.css';
 import useRectActions from "../../hooks/useRectActions";
 import { ProjectsContext } from "../../context/ProjectsContext";
 import Icons from './topbar/Icons';
-import Text from './elements/Text';
 import LinkList from './topbar/LinkList';
 
 const Canvas = () => {
@@ -104,7 +103,10 @@ const Canvas = () => {
                     square.tool === 'text' ? <Text key={index} square={square} gridSize={gridSize} /> :
                     <Square key={index} square={square} gridSize={gridSize} onClick={() => handleRectClick(square)} isSelected={selectedRect && selectedRect.id === square.id} />
                 ))}
-                {currentSquare && ( <Square square={currentSquare} gridSize={gridSize} /> )}
+                {currentSquare && ( 
+                    currentSquare.tool === 'text' ? <TextInput square={currentSquare} gridSize={gridSize} /> :
+                    <Square square={currentSquare} gridSize={gridSize} /> 
+                )}
             </div>
         </div>
     );
