@@ -18,6 +18,10 @@
     cursor: crosshair;
 }
 
+.canvas.cursor-text {
+    cursor: text;
+}
+
 .grid {
     z-index: 1;
     background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(to right, var(--grid-color) 1px, var(--canvas-bg) 1px);

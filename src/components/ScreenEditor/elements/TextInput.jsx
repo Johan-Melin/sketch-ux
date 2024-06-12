@@ -8,6 +8,8 @@ const TextInput = ({square, gridSize}) => {
         top: square.y * gridSize.y,
         width: "100px",
         height: "20px",
+        backgroundColor: "white",
+        color: "black",
     }}/>
   )
 }

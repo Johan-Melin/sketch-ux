@@ -77,7 +77,9 @@ const Canvas = () => {
         if (!canCreate) return;
         if (currentSquare) {
             addRect(currentSquare);
-            setCurrentSquare(null);
+            if(selectedTool !== 'text'){
+                setCurrentSquare(null);
+            }
         }
     };
 
@@ -94,7 +96,7 @@ const Canvas = () => {
                 className={`
                     ${styles.canvas} 
                     ${mode === "play" ? '' : styles.grid}
-                    ${isCreateMode ? styles['cursor-crosshair'] : ''}
+                    ${selectedTool === 'text' ? styles['cursor-text'] : isCreateMode ? styles['cursor-crosshair'] : ''}
                 `}
             >
                 {displayModal === "icon" && <Icons />}
