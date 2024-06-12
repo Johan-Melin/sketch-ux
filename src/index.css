@@ -12,7 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --topbar-height: 40px;
+  --topbar-height: 48px;
   --default-width: 100vw;
   --default-height: calc(100vh - var(--topbar-height));  
   --grid-size-x: 5%;
